@@ -13,3 +13,5 @@
 	<input type="submit" value="Prihlasit" >	
 </form>
 
+<br/>
+Nebo muzete <a href="add_user.php">pridat uzivatele<a/>

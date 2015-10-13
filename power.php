@@ -10,7 +10,6 @@ if(empty($pass) or empty($login)){
 	die();
 }
 
-//echo 'using: ', $login, ':', $pass;
 echo '<br/>';
 
 $db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'xknote11', 'peron9ur');
@@ -19,9 +18,7 @@ if(!$db)
 if(!mysql_select_db('xknote11', $db))
 		die('databeze nedostupna');
 
-$cmmnd = 'select password from passwords where login=\'martin\'';
-//echo $cmmnd, '<br/>';
-
+$cmmnd = "select password from passwords where login='$login'";
 
 $retval = mysql_query($cmmnd, $db);
 $row = mysql_fetch_array($retval, MYSQL_ASSOC);
