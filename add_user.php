@@ -4,15 +4,26 @@
 Prosim, vyplnte udaje o uzivateli:
 <form method="post" action="add_user.php">
 	Jmeno:<br>
-	<input type="text" name="name">*<br>
+	<input type="text" name="name">*<br><br>
 	Login:<br>
-	<input type="text" name="login">*<br>
+	<input type="text" name="login">*<br><br>
 	Heslo:<br>
-	<input type="password" name="passwd">*<br>
-	<input type="submit" value="Pridat">
+	<input type="password" name="passwd">*<br><br>
+	Datum Narozeni:<br><font size="2">(Den/Mesic/Rok)</font><br>
+	<input type="text" name="day" size="5">/
+	<input type="text" name="month" size="5">/
+	<input type="text" name="year" size="10"><br><br>
+	Role:<br>
+	<select required name="role">
+		<option value="1">Spravce personalu</option>
+		<option value="2">Spravce koncertu</option>
+		<option value="3">Spravce skladeb</option>
+	</select>*
+	<br><br>
+	<input type="submit" value="Pridat uzivatele">
 </form>
-<br>
 
+<br> Udaje oznacene * jsou povinne <br><br>
 <a href="index.php">Zpet na hlavni stranu</a>
 <br>
 
@@ -21,21 +32,44 @@ Prosim, vyplnte udaje o uzivateli:
 
 
 <?php
+
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+	include_once 'functions.php';
+
+	if($_SESSION['connected'] == false)
+			db_connect();
+	if($_SESSION['connected'] == false)
+			die('Nepodarilo se pripojit k databazi');
+
 			$login = htmlspecialchars($_POST['login']);
 			$pass = htmlspecialchars($_POST['passwd']);
 			$name = htmlspecialchars($_POST['name']);
+
+			$year = htmlspecialchars($_POST['year']);
+			$month = htmlspecialchars($_POST['month']);
+			$day = htmlspecialchars($_POST['day']);
+	
+			if(!((is_numeric($year) and is_numeric($month) and is_numeric($day)) or
+					(empty($year) and empty($month) and empty($day) ) ) ){
+				die("<font color=\"red\">Nepsravne datum narozeni!</font>");
+			}
+
+			$birth = $year . '.' . $month . '.' . $day;
+
+			$role = htmlspecialchars($_POST['role']);
+
 			if(empty($login) or empty($pass) or empty($name)){
-				die("vyplnte vsechny povinne udaje");
+				die("<font color=\"red\">Vyplnte vsechny povinne udaje!</font>");
 			}
 			
-			$db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'xknote11', 'peron9ur');
+			$db = $_SESSION['db'];
+			/*$db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'xknote11', 'peron9ur');
 			if(!$db) 
-				die('nelze se pripojit k databazi');
+				die("<font color=\"red\">Nelze se pripojit k DB!</font>");
 			if(!mysql_select_db('xknote11', $db))
-				die('databeze nedostupna');
-			
-			$cmmnd = "insert into passwords (login, password, name) values ('$login', '$pass', '$name')";
+			 	die("<font color=\"red\">Databaze nedostupna!</font>");
+			 */
+			$cmmnd = "insert into users (Name, Login, Password, Date, Role) values ('$name', '$login', '$pass', '$birth', '$role')";
 			
 			if(mysql_query($cmmnd, $db)){
 				echo "pridano";
@@ -48,6 +82,8 @@ Prosim, vyplnte udaje o uzivateli:
 			echo "<br>login: ", $login;
 			echo "<br>pass: ", $pass;
 			echo "<br>name: ", $name;
+			echo "<br>date: ", $birth;
+			echo "<br>role: ", $role;
 
 			mysql_close($db);
 	}
