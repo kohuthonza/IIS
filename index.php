@@ -1,49 +1,38 @@
+<?php
+session_start();
+if(isset($_SESSION['logged'])){
+	header('Location: profile.php');
+}
+	
+?>
+
+
 <html>
-Informacni system Spravce Koncertu
+<head>
+
+<title>
+Informacni system Sprava Filharmonie
+</title>
+
+Informacni system Sprava Filharmonie
 <br><br>
 
 <body>
-
-<?php
-session_start();
-
-if($_SESSION['logged'] != true){
-	$_SESSION['logged'] = false;
-	$_SESSION['connected'] = false;
-	echo "Prosim, prohlaste se:";
-
-	echo
-	"
+Prosim, prohlaste se:
 	<br><br>
 
-	<form method=\"post\" action=\"power.php?logout=0form\">
+	<form method="post" action="power.php?logout=0">
 		Login:<br>
-		<input type=\"text\" name=\"login\">
+		<input type="text" name="login">
 		<br>
 		Heslo:<br>
-		<input type=\"password\" name=\"passwd\">
+		<input type="password" name="passwd">
 		<br>
-		<input type=\"submit\" value=\"Prihlasit\" >	
+		<input type="submit" value="Prihlasit" >	
 	</form>
 
 	<br/>
-	Nebo muzete <a href=\"add_user.php\">pridat uzivatele<a/>
-	";
-	die();
-}
-echo $_SESSION['login'];
-echo " prihlasen";
-echo "
-	<br>
-	<form method=\"post\" action=\"power.php?logout=1\">
-		<input type=\"submit\" value=\"Odhlasit\"  >	
-	</form>
-	</form>
-	";
-	
-	
-	
-?>
+	Nebo muzete <a href="add_user.php">pridat uzivatele<a/>
 
 </body>
 </html>

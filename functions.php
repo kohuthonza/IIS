@@ -1,54 +1,39 @@
 <?php
-session_start();
-
-
 
 function login($login, $pass){
-$cmmnd = "select Password, Role from users where Login='$login'";
+	$cmmnd = "select Password, Role from users where Login='$login'";
 
-$retval = mysql_query($cmmnd, $_SESSION['db']);
-$row = mysql_fetch_array($retval, MYSQL_ASSOC);
-$pass_DB =  $row['Password'];
-$role = $row['Role'];
+	$retval = mysql_query($cmmnd, $_SESSION['db']);
+	$row = mysql_fetch_array($retval, MYSQL_ASSOC);
+	$pass_DB =  $row['Password'];
+	$role = $row['Role'];
 
-if($pass_DB != $pass)
-		die('Spatne heslo<br><a href="index.php">Zpet na hlavni stranu</a>');
+	if($pass_DB != $pass)
+		die('Spatne heslo');
 
-switch($role){
-	case 1:
-			//echo "spravce koncertu";
-			//header('Location: /~xknote11/personel.php');
-			$_SESSION['role'] = 1;
-			break;
-	case 2:
-			//echo "spravce koncertu";
-			break;
-	case 3:
-			//echo "spravce skladeb";
-			break;
-	default:
-			break;
-
-}
-
-$_SESSION['logged'] = true;
-$_SESSION['login'] = $login;
+	$_SESSION['logged'] = true;
 
 }
 
 function db_connect(){
-$db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'xknote11', 'peron9ur');
+	$db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'xknote11', 'peron9ur');
 
-if(!$db) 
-		die('nelze se pripojit k databazi');
-if(!mysql_select_db('xknote11', $db))
-		die('databeze nedostupna');
+	if(!$db){ 
 
-$_SESSION['connected'] = true;
-$_SESSION['db'] = $db;
+		echo ('nelze se pripojit k databazi');
+		return false;
+	}
+	if(!mysql_select_db('xknote11', $db)){
+
+		echo('databeze nedostupna');
+		return false;
+	}
+
+	$_SESSION['connected'] = true;
+	$_SESSION['db'] = $db;
+	return true;
 
 }
-
 
 ?>
 
