@@ -39,49 +39,48 @@ Prosim, vyplnte udaje o uzivateli:
 
 session_start();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	include_once 'functions.php';
 
 	if(!db_connect())
 			die('Nepodarilo se pripojit k databazi');
 
-		$login = htmlspecialchars($_POST['login']);
-		$pass = htmlspecialchars($_POST['passwd']);
-		$name = htmlspecialchars($_POST['name']);
+	$login = htmlspecialchars($_POST['login']);
+	$pass = htmlspecialchars($_POST['passwd']);
+	$name = htmlspecialchars($_POST['name']);
 
-		$year = htmlspecialchars($_POST['year']);
-		$month = htmlspecialchars($_POST['month']);
-		$day = htmlspecialchars($_POST['day']);
+	$year = htmlspecialchars($_POST['year']);
+	$month = htmlspecialchars($_POST['month']);
+	$day = htmlspecialchars($_POST['day']);
 	
-		if(!((is_numeric($year) and is_numeric($month) and is_numeric($day)) or
-				(empty($year) and empty($month) and empty($day) ) ) ){
-			die("<font color=\"red\">Nepsravne datum narozeni!</font>");
-		}
+	if(!((is_numeric($year) and is_numeric($month) and is_numeric($day)) or
+			(empty($year) and empty($month) and empty($day) ) ) ){
+		die("<font color=\"red\">Nepsravne datum narozeni!</font>");
+	}
 
-		$birth = $year . '.' . $month . '.' . $day;
+	$birth = $year . '.' . $month . '.' . $day;
 
-		$role = htmlspecialchars($_POST['role']);
+	$role = htmlspecialchars($_POST['role']);
 
-		if(empty($login) or empty($pass) or empty($name)){
-			die("<font color=\"red\">Vyplnte vsechny povinne udaje!</font>");
-		}
+	if(empty($login) or empty($pass) or empty($name)){
+		die("<font color=\"red\">Vyplnte vsechny povinne udaje!</font>");
+	}
 			
-		$db = $_SESSION['db'];
+	$db = $_SESSION['db'];
 
-		$cmmnd = "insert into users (Name, Login, Password, Date, Role) values ('$name', '$login', '$pass', '$birth', '$role')";
+	$cmmnd = "insert into users (Name, Login, Password, Date, Role) values ('$name', '$login', '$pass', '$birth', '$role')";
 			
-		if(mysql_query($cmmnd, $db)){
-			echo "pridano";
-		}
-		else{
-			echo "error: ", mysql_error($db);
-			die();
-		}
+	if(mysql_query($cmmnd, $db)){
+		echo "pridano";
+	}
+	else{
+		echo "error: ", mysql_error($db);
+		die();
+	}
 
-		echo "<br>login: ", $login;
-		echo "<br>pass: ", $pass;
-		echo "<br>name: ", $name;
-		echo "<br>date: ", $birth;
-		echo "<br>role: ", $role;
+	echo "<br>login: ", $login;
+	echo "<br>pass: ", $pass;
+	echo "<br>name: ", $name;
+	echo "<br>date: ", $birth;
+	echo "<br>role: ", $role;
 
-		mysql_close($db);
+	mysql_close($db);
 }

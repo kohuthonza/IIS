@@ -1,17 +1,19 @@
 <?php
 
 function login($login, $pass){
-	$cmmnd = "select Password, Role from users where Login='$login'";
+	$cmmnd = "select * from users where Login='$login'";
 
 	$retval = mysql_query($cmmnd, $_SESSION['db']);
 	$row = mysql_fetch_array($retval, MYSQL_ASSOC);
 	$pass_DB =  $row['Password'];
-	$role = $row['Role'];
 
 	if($pass_DB != $pass)
 		die('Spatne heslo');
 
 	$_SESSION['logged'] = true;
+	$_SESSION['login'] = $login;
+	$_SESSION['role'] = $row['Role'];
+	$_SESSION['name'] = $row['Name'];
 
 }
 
