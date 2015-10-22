@@ -33,6 +33,7 @@ function db_connect(){
 
 	$_SESSION['connected'] = true;
 	$_SESSION['db'] = $db;
+
 	return true;
 
 }

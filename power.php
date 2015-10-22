@@ -20,12 +20,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		//echo $_SESSION['role'];
 		Header('Location: profile.php');
 
-		//mysql_close($db);
+		mysql_close($_SESSION['db']);
 	}
 	else{
 		session_destroy();
 		$_SESSION = array();
-		unset($_SESSION['logged']);
+		//unset($_SESSION['logged']);
 		echo "byl jste odhlasen<br>";
 		echo "<a href=\"index.php\">Zpet na hlavni stranu</a>";
 	}

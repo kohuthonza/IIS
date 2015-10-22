@@ -36,12 +36,12 @@ Prosim, vyplnte udaje o uzivateli:
 
 
 <?php
-
+include_once('functions.php');
 session_start();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	if(!db_connect())
-			die('Nepodarilo se pripojit k databazi');
+		die('Nepodarilo se pripojit k databazi');
 
 	$login = htmlspecialchars($_POST['login']);
 	$pass = htmlspecialchars($_POST['passwd']);
