@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 session_start();
 if(isset($_SESSION['logged'])){
 	header('Location: profile.php');
@@ -9,30 +10,32 @@ if(isset($_SESSION['logged'])){
 
 <html>
 <head>
-
+<link rel="stylesheet" href="style.css" type="text/css">
 <title>
-Informacni system Sprava Filharmonie
+Filharmonie
 </title>
-
-Informacni system Sprava Filharmonie
-<br><br>
+</head>
 
 <body>
-Prosim, prohlaste se:
-	<br><br>
-
+	<div type="headline">
+		Filharmonie
+	</div>
 	<form method="post" action="power.php?logout=0">
-		Login:<br>
-		<input type="text" name="login">
 		<br>
-		Heslo:<br>
-		<input type="password" name="passwd">
+		<span></span>
+			<input type="text" name="login" placeholder="Přihlašovací jméno">
+		<span></span>
 		<br>
-		<input type="submit" value="Prihlasit" >	
+		<span></span>
+			<input type="password" name="passwd" placeholder="Heslo">
+		<span></span>
+		<br>
+		<span></span>
+			<input type="submit" value="Přihlásit se" >
+		<span></span>
 	</form>
-
-	<br/>
-	Nebo muzete <a href="add_user.php">pridat uzivatele<a/>
-
+	<div type="new_user">
+		Nebo můžete <a href="add_user.php">přidat uživatele<a/>
+	</div>	
 </body>
 </html>
