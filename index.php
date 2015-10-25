@@ -10,7 +10,7 @@ if(isset($_SESSION['logged'])){
 
 <html>
 <head>
-<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="stylesheet" href="index.css" type="text/css">
 <title>
 Filharmonie
 </title>
