@@ -1,0 +1,44 @@
+body {
+	color: maroon; 
+}
+
+input[type="text"]{
+	position: absolute;
+	border: solid 2px brown;
+	width: 20%;
+	height: 10%;
+	top: 35%;
+	font-size:x-large;
+}
+
+input[type="password"]{
+	position: absolute;
+	border: solid 2px brown;
+	width: 20%;
+	height: 10%;
+	top: 50%;
+	font-size:x-large;
+}
+
+input[type="submit"]{
+	position: absolute;
+	top: 63%;
+	width: 20%;
+	height: 5%;
+}
+
+div[type="new_user"]{
+	position:absolute;
+	top:70%;
+	left:40.4%;
+}
+
+div[type="headline"]{
+	font-size:900%;
+	text-align: center;
+}
+
+span {
+    display: inline-block;
+    width:40%;
+}
