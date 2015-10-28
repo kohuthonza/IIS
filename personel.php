@@ -86,6 +86,8 @@ mysql_close($_SESSION['db']);
 #nastavit tak, aby nahore prvni 2cm byly ovladaci prvky (zpet na hl. stranu,
 #pridat hudebnika, pridat formular, ktery ubde fungovat jako filtr pro tabulku
 
+#ahoj
+
 
 ?>
 
