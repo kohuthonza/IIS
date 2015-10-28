@@ -50,13 +50,39 @@ if(!db_connect())
 	die("Nepodarilo se pripojit k databazi!");
 
 //if the page recieved a command to update a specific row of the table
-if(isset($_POST['update'])){
+if(isset($_POST['updatebtn'])){
 	$updateQry = "update musicians set Name='$_POST[name]', Address='$_POST[addr]', RC='$_POST[rc]', Phone='$_POST[phone]', Email='$_POST[email]' where RC='$_POST[hidden]'";
 
+	mysql_query($updateQry, $_SESSION['db']);
+};
+
+$SQL = "select * from musicians";
+
+if(isset($_POST['filter'])){
+	$where = "where";
+	if(!empty($_POST['Fname'])){
+		$SQL = $SQL . " $where Name='$_POST[Fname]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Frc'])){
+		$SQL = $SQL . " $where RC='$_POST[Frc]'";
+		$where = " and";			
+	}
+	if(!empty($_POST['Faddr'])){
+		$SQL = $SQL . " $where Address='$_POST[Faddr]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Fphone'])){
+		$SQL = $SQL . " $where Phone='$_POST[Fphone]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Femail'])){
+		$SQL = $SQL . " $where Email='$_POST[Femail]'";
+		$where = " and";
+	}
 };
 
 
-$SQL = "select * from musicians";
 $retval = mysql_query($SQL, $_SESSION['db']);
 
 echo "<table border=1>
@@ -77,7 +103,8 @@ while($row = mysql_fetch_array($retval)){
 	echo "<td>" . "<input type=text name=phone value=" . $row['Phone'] . " </td>";
 	echo "<td>" . "<input type=text name=email value=" . $row['Email'] . " </td>";
 	echo "<td>" . "<input type=hidden name=hidden value=" . $row['RC'] . " </td>";
-	echo "<td>" . "<input type=submit name=update value=Upravit" . " </td>";
+	echo "<td>" . "<input type=submit name=updatebtn value=Upravit" . " </td>";
+	echo "</tr>";
 	echo "</form>";
 }
 echo "</table>";
