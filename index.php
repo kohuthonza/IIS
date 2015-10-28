@@ -1,5 +1,6 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
+session_save_path("/homes/eva/xk/xkohut08/WWW/tmp");
 session_start();
 if(isset($_SESSION['logged'])){
 	header('Location: profile.php');
