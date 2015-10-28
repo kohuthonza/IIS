@@ -20,22 +20,19 @@ Filharmonie
 	<div type="headline">
 		Filharmonie
 	</div>
+	<br>
+	<div type="border">
+	</div>
 	<form method="post" action="power.php?logout=0">
 		<br>
-		<span></span>
 			<input type="text" name="login" placeholder="Přihlašovací jméno">
-		<span></span>
 		<br>
-		<span></span>
 			<input type="password" name="passwd" placeholder="Heslo">
-		<span></span>
 		<br>
-		<span></span>
 			<input type="submit" value="Přihlásit se" >
-		<span></span>
 	</form>
 	<div type="new_user">
 		Nebo můžete <a href="add_user.php">přidat uživatele<a/>
-	</div>	
+	</div>
 </body>
 </html>

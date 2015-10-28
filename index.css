@@ -1,11 +1,15 @@
 body {
 	color: maroon; 
+	background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/background.jpg);
+	background-position: center 40%;
+	background-repeat: no-repeat;
 }
 
 input[type="text"]{
 	position: absolute;
 	border: solid 2px brown;
 	width: 20%;
+	left: 40%;
 	height: 10%;
 	top: 35%;
 	font-size:x-large;
@@ -16,6 +20,7 @@ input[type="password"]{
 	border: solid 2px brown;
 	width: 20%;
 	height: 10%;
+	left: 40%;
 	top: 50%;
 	font-size:x-large;
 }
@@ -24,6 +29,7 @@ input[type="submit"]{
 	position: absolute;
 	top: 63%;
 	width: 20%;
+	left: 40%;
 	height: 5%;
 }
 
@@ -31,11 +37,22 @@ div[type="new_user"]{
 	position:absolute;
 	top:70%;
 	left:40.4%;
+
 }
 
 div[type="headline"]{
 	font-size:900%;
 	text-align: center;
+}
+
+div[type="border"]{
+	position:absolute;
+	background-color:white;
+	border: solid 4px brown;
+	height: 46%;
+	width: 25%;
+	left:37.5%;
+	top: 30%;
 }
 
 span {
