@@ -31,7 +31,7 @@ Zaznamy o lidech:<br>
 
 	<br><br>
 <?php
-session_save_path("/homes/eva/xk/xkohut08/WWW/tmp");
+session_save_path("./tmp");
 session_start();
 include_once('functions.php');
 

@@ -1,7 +1,7 @@
 <br>
 
 <?php
-session_save_path("/homes/eva/xk/xkohut08/WWW/tmp");
+session_save_path("./tmp");
 session_start();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	include_once 'functions.php';
