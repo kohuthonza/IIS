@@ -26,7 +26,7 @@ Zaznamy o lidech:<br>
 <br>
 <a href="add_musician.php">Pridat hudebnika</a>
 <table border=1>
-		<tr>
+		<tr>	
 		<th>Jmeno</th>
 		<th>Prijmeni</th>
 		<th>Rodne cislo</th>
@@ -131,11 +131,6 @@ while($row = mysql_fetch_array($retval)){
 }
 echo "</table>";
 mysql_close($_SESSION['db']);
-
-
-#nastavit tak, aby nahore prvni 2cm byly ovladaci prvky (zpet na hl. stranu,
-#pridat hudebnika, pridat formular, ktery ubde fungovat jako filtr pro tabulku
-
 
 ?>
 

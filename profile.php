@@ -60,7 +60,7 @@ switch($role){
 		echo "<input type=\"submit\" value=\"Hudebnici\" >";
 		break;
 	case 3:
-		echo "<form action=\"songs.php\">";
+		echo "<form action=\"comps.php\">";
 		echo "<input type=\"submit\" value=\"Skladby\" >";
 		break;
 }

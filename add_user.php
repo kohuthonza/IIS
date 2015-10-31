@@ -35,7 +35,7 @@ Přidat uživatele
 		<div class="form-group row">
 			<label for="second_name" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Příjmení</label>
 			<div class="col-lg-4">
-				<input type="text" class="form-control input-lg" id="second_name" placeholder="Příjmení" required>
+				<input type="text" class="form-control input-lg" id="second_name" placeholder="Příjmení" name="sname" required>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -121,8 +121,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$login = htmlspecialchars($_POST['login']);
 	$pass = htmlspecialchars($_POST['passwd']);
-	$name = htmlspecialchars($_POST['name']);
-
+	$name = htmlspecialchars($_POST['name']) . " " . htmlspecialchars($_POST['sname']); 
+    
 	$year = htmlspecialchars($_POST['year']);
 	$month = htmlspecialchars($_POST['month']);
 	$day = htmlspecialchars($_POST['day']);
