@@ -22,7 +22,7 @@ Přidat uživatele
 <form method="post" action="add_user.php">
 	
 	<div class="container-fluid">
-	<form class="form-horizontal" data-toggle="validator">
+	<form class="form-horizontal">
 		<div class="form-group row">
 			&nbsp;
 		</div>
