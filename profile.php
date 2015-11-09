@@ -77,7 +77,7 @@ switch($role){
 		echo "
 			<div class=\"row\">
 				<div class=\"col-lg-1 col-lg-offset-1 text-right\"><h2>Role:<h2></div>
-				<div class=\"col-lg-3 col-lg-offset-1\"><h2>Správce koncertů<h2></div>
+				<div class=\"col-lg-3 col-lg-offset-1\"><h2>Správce hudebníků<h2></div>
 			</div>
 			 ";
 		break;
@@ -85,7 +85,7 @@ switch($role){
 		echo "
 			<div class=\"row\">
 				<div class=\"col-lg-1 col-lg-offset-1 text-right\"><h2>Role:<h2></div>
-				<div class=\"col-lg-3 col-lg-offset-1\"><h2>Správce hudebníků<h2></div>
+				<div class=\"col-lg-3 col-lg-offset-1\"><h2>Správce koncertů<h2></div>
 			</div>
 			 ";
 		break;
@@ -123,21 +123,21 @@ echo "<br><br>";
 	<input type="submit" value="Odhlasit" >	
 </form>
 <form action="add_user.php">
-	<input type="submit" value="Pridat uzivatele" >	
+	<input type="submit" value="Pridat uzivatele" >
 </form>
 
 
 
 
 <?php
-switch($role){
+switch($role){	
 	case 1:
-		echo "<form action=\"concerts.php\">";
-		echo "<input type=\"submit\" value=\"Koncerty\" >";
-		break;
-	case 2:
 		echo "<form action=\"personel.php\">";
 		echo "<input type=\"submit\" value=\"Hudebnici\" >";
+		break;
+	case 2:
+		echo "<form action=\"concerts.php\">";
+		echo "<input type=\"submit\" value=\"Koncerty\" >";
 		break;
 	case 3:
 		echo "<form action=\"comps.php\">";

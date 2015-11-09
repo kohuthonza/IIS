@@ -4,7 +4,7 @@ session_start();
 include_once('functions.php');
 
 
-if($_SESSION['role'] != 2){
+if($_SESSION['role'] != 1){
 	$val = $_SESSION['role'];
 	die("Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
