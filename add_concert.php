@@ -9,3 +9,6 @@ if($_SESSION['role'] != 2){
 			");
 }
 ?>
+
+Echo vsechny hudebniky  do droplistu
+Echo vsechny skladby do droplistu
