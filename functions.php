@@ -14,6 +14,7 @@ function login($login, $pass){
 	$_SESSION['login'] = $login;
 	$_SESSION['role'] = $row['Role'];
 	$_SESSION['name'] = $row['Name'];
+	$_SESSION['date'] = $row['Date'];
 
 }
 

@@ -79,7 +79,7 @@ Přidat uživatele
 			<div class="col-lg-4">
 				<select required class="form-control input-lg" id="role" name="role">
 					<option value="" disabled selected>Vyberte roli</option>
-					<option value="1">Správce personálu</option>
+					<option value="1">Správce hudebíků</option>
 					<option value="2">Správce koncertů</option>
 					<option value="3">Správce skladeb</option>	
 				</select>
