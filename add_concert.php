@@ -17,11 +17,11 @@ Pridat koncert
 <body>
 
 
-Prosim, vyplnte nasledujici fomrulare pro pridani koncertu:
+Prosim, vyplnte nasledujici formulare pro pridani koncertu:
 <br><br>
 <form method="post" action="add_concert1.php">
 	Vyberte skladby pozadovane pro koncert: <br>
-	<select name="musics[]" multiple>
+	<select name="comps[]" multiple>
 	
 <?php
 if(!db_connect())
@@ -39,38 +39,8 @@ mysql_close($_SESSION['db']);
 	</select>
 	<br>
 	<input type="submit" name="sent" value="Pokracovat">
-
-<?php
-if(!isset($_POST['sent']))
-	die();
-
-//$cmmnd = "insert into concerts (ID, Name, Date) values (NULL, '$_POST[Cname]', '1994.5.4')";
-//mysql_query($cmmnd, $_SESSION['db']);
-
-//echo "posledni zaznam:" . mysql_insert_id();
-
-//tady pripojit k databazi
-//skontrolovat vstup
-//parsovat datum
-//nahrat do SQL prikazu
-//ulozit do DB
-//ukoncit spojeni
-
-//$idx = mysql_insert_id();
-	
-echo "pridavam skladby s ID:<br>";	
-foreach ($_POST['comps'] as $selectedOption){
-	echo $selectedOption."<br>";
-	$cmmnd = "insert into _concerts_C (ID, ID_comp) values ('$idx', '$selectedOption')";
-	//mysql_query($cmmnd, $_SESSION['db']);
-}
-
-mysql_close($_SESSION['db']);	
-
-?>
-
 </form>
 
-
+<a href="index.php">Zpet na hlavni stranu</a>
 </body>
 </html>
