@@ -32,6 +32,8 @@ Pridat koncert
 
 <form method="post" action="add_concert2.php">
 	Vyberte datum koncertu: <br>
+	<!-- tady je schvalne datum napevno v 1 formulari, abys sem mohl hodit ten css vyber data
+	potom je nutne naparsovat datum dokopy na tvar YYYY.MM.DD aby se spravne ulozilo do DB-->
 	<input type="text" value="2015.1.1" name="date">*<br><br>
 	<input type="submit" name="sent" value="Pokracovat">
 </form>
