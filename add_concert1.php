@@ -4,9 +4,12 @@ session_save_path("./tmp");
 session_start();
 if($_SESSION['role'] != 2){
 	$val = $_SESSION['role'];
-	die("Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
+	die("<html>
+		<title>Pridat koncert</title><body>
+		Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
-			");
+		</body></html>
+		");
 }
 
 if(isset($_POST['sent'])){

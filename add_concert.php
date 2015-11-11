@@ -4,9 +4,12 @@ session_save_path("./tmp");
 session_start();
 if($_SESSION['role'] != 2){
 	$val = $_SESSION['role'];
-	die("Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
+	die("<html>
+		<title>Pridat koncert</title><body>
+		Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
-			");
+		</body></html>
+		");
 }
 ?>
 <html>
@@ -33,6 +36,8 @@ $retval2 = mysql_query($SQL2, $_SESSION['db']);
 while($row2 = mysql_fetch_array($retval2)){
 	echo "<option value=" . $row2['ID'] . ">" . $row2['Name'] . "</option>";
 }
+
+$_SESSION['concert_added'] = false;
 
 mysql_close($_SESSION['db']);	
 ?>

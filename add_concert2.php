@@ -4,9 +4,13 @@ session_save_path("./tmp");
 session_start();
 if($_SESSION['role'] != 2){
 	$val = $_SESSION['role'];
-	die("Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
+	die("<html>
+		<title>Pridat koncert</title><body>
+		Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 2<br>
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
-			");
+		</body></html>
+		");
+
 }
 
 if(isset($_POST['sent'])){
@@ -22,20 +26,33 @@ if(isset($_POST['sent'])){
 }
 if(isset($_POST['addC'])){
 	if(!empty($_POST['musics'])){
-		$_SESSION['musics'] = $_POST['musics'];
-		echo "pridavam skladby s ID:<br>";	
-		foreach ($_SESSION['compositions'] as $selectedOption){
-			echo $selectedOption."<br>";
+		if(!$_SESSION['concert_added']){
+			$_SESSION['musics'] = $_POST['musics'];
+			echo "pridavam skladby s ID:<br>";	
+			foreach ($_SESSION['compositions'] as $selectedOption){
+				echo $selectedOption."<br>";
+			}
+			echo "pridavam hudebniky s RC:<br>";
+			foreach ($_SESSION['musics'] as $selectedOption){
+				echo $selectedOption."<br>";
+				//$cmmnd = "insert into _concerts_C (ID, ID_comp) values ('$idx', '$selectedOption')";
+				//mysql_query($cmmnd, $_SESSION['db']);
+			}
+			echo "<br>pridavam koncert data: " . $_SESSION['conct_date'] . "<br>";
+			
+			//tady pripojit a pridat vsechny veci do DB
+			unset($_SESSION['conct_date'], $_SESSION['musics'], $_SESSION['compositions']);
+			$_SESSION['concert_added'] = true;
 		}
-		echo "pridavam hudebniky s RC:<br>";
-		foreach ($_SESSION['musics'] as $selectedOption){
-			echo $selectedOption."<br>";
-			//$cmmnd = "insert into _concerts_C (ID, ID_comp) values ('$idx', '$selectedOption')";
-			//mysql_query($cmmnd, $_SESSION['db']);
-		}
-		echo "<br>pridavam koncert data: " . $_SESSION['conct_date'] . "<br>";
-		
-		//tady pripojit a pridat vsechny veci do DB
+		else{
+			die("<html>
+				<title>Pridat koncert</title><body>
+				koncert uz byl pridan!<br>
+				<a href=\"add_concert.php\">Pridat novy koncert</a>
+				<a href=\"index.php\">Zpet na hlavni stranu</a>
+				</body></html>
+				");
+		}		
 	}
 	else{
 		echo "Vyberte nejake hudebniky pro koncert!<br>";
