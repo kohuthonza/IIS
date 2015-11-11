@@ -33,6 +33,13 @@ Prosim, vyplnte udaje o hudebnikovi:
 	<input type="text" name="email">*<br><br>
 	Mesto (adresa):<br>
 	<input type="text" name="town">*<br><br>
+	
+	Umi smycec:<br>
+	<input type="text" name="sm">*<br><br>
+	Umi dech:<br>
+	<input type="text" name="d">*<br><br>
+	Umi strunny:<br>
+	<input type="text" name="str">*<br><br>
 	<input type="submit" value="Pridat hudebnika">
 </form>
 
@@ -61,10 +68,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$email = htmlspecialchars($_POST['email']);
 	$town = htmlspecialchars($_POST['town']);
 	
+	$str = htmlspecialchars($_POST['str']);
+	$d = htmlspecialchars($_POST['d']);
+	$sm = htmlspecialchars($_POST['sm']);
+	
+	if($str != 'F' and $str != 'T')
+		die("Nespravna hodnota u 'Umi strunny'! Zadejte T/F.<br><a href=\"add_musician.php\">Znovu nacist</a>");
+			
+	if($sm != 'F' and $sm != 'T')
+		die("Nespravna hodnota u 'Umi smycec'! Zadejte T/F.<br><a href=\"add_musician.php\">Znovu nacist</a>");
+			
+	if($d != 'F' and $d != 'T')
+		die("Nespravna hodnota u 'Umi dech'! Zadejte T/F.<br><a href=\"add_musician.php\">Znovu nacist</a>");
 			
 	$db = $_SESSION['db'];
 
-	$cmmnd = "insert into musicians (Name, SName, RC, Phone, Email, Town) values ('$name', '$sname', '$rc', '$phone', '$email', '$town')";
+	$cmmnd = "insert into musicians (Name, SName, RC, Phone, Email, Town, Sm, D, Str) values ('$name', '$sname', '$rc', '$phone', '$email', '$town', '$sm', '$d', '$str')";
 			
 	if(mysql_query($cmmnd, $db)){
 		echo "pridano";
