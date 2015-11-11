@@ -33,7 +33,6 @@ Prosim, vyplnte udaje o hudebnikovi:
 	<input type="text" name="email">*<br><br>
 	Mesto (adresa):<br>
 	<input type="text" name="town">*<br><br>
-	
 	Umi smycec:<br>
 	<input type="text" name="sm">*<br><br>
 	Umi dech:<br>
@@ -73,14 +72,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$sm = htmlspecialchars($_POST['sm']);
 	
 	if($str != 'F' and $str != 'T')
-		die("Nespravna hodnota u 'Umi strunny'! Zadejte T/F.<br><a href=\"add_musician.php\">Znovu nacist</a>");
+		die("Nespravna hodnota u 'Umi strunny'! Zadejte T/F.");
 			
 	if($sm != 'F' and $sm != 'T')
-		die("Nespravna hodnota u 'Umi smycec'! Zadejte T/F.<br><a href=\"add_musician.php\">Znovu nacist</a>");
+		die("Nespravna hodnota u 'Umi smycec'! Zadejte T/F.");
 			
 	if($d != 'F' and $d != 'T')
-		die("Nespravna hodnota u 'Umi dech'! Zadejte T/F.<br><a href=\"add_musician.php\">Znovu nacist</a>");
+		die("Nespravna hodnota u 'Umi dech'! Zadejte T/F.");
 			
+	if(strlen($rc) != 11)
+		die("Nespravna delka rodneho cisla!");
+	
 	$db = $_SESSION['db'];
 
 	$cmmnd = "insert into musicians (Name, SName, RC, Phone, Email, Town, Sm, D, Str) values ('$name', '$sname', '$rc', '$phone', '$email', '$town', '$sm', '$d', '$str')";
