@@ -12,7 +12,7 @@ if($_SESSION['role'] != 3){
 
 <html>
 <title>
-Pridat hudebnika
+Pridat skladbu
 </title>
 
 <body>
@@ -23,6 +23,12 @@ Prosim, vyplnte udaje o skladbe:
 	<input type="text" name="name">*<br><br>
 	Tonina:<br>
 	<input type="text" name="key">*<br><br>
+	Pocet smyccovych nastroju:<br>
+	<input type="text" name="sm">*<br><br>
+	Pocet dechovych nastroju:<br>
+	<input type="text" name="d">*<br><br>
+	Pocet strunnych nastroju:<br>
+	<input type="text" name="str">*<br><br>
 	<input type="submit" value="Pridat skladbu">
 </form>
 
@@ -42,11 +48,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$name = htmlspecialchars($_POST['name']);
 	$key = htmlspecialchars($_POST['key']);
-	
+	$sm = htmlspecialchars($_POST['sm']);
+	$d = htmlspecialchars($_POST['d']);
+	$str = htmlspecialchars($_POST['str']);
+
 			
 	$db = $_SESSION['db'];
 
-	$cmmnd = "insert into compositions (ID, Name, Comp_Key) values (NULL, '$name', '$key')";
+	$cmmnd = "insert into compositions (ID, Name, Comp_Key, Sm, D, Str) values (NULL, '$name', '$key', '$sm', '$d', '$str')";
 			
 	if(mysql_query($cmmnd, $db)){
 		echo "pridano";

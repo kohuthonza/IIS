@@ -60,7 +60,16 @@ if(!db_connect())
 
 //if the page recieved a command to update a specific row of the table
 if(isset($_POST['updatebtn'])){
-	$updateQry = "update musicians set Name='$_POST[name]', SName='$_POST[Sname]', Town='$_POST[town]', RC='$_POST[rc]', Phone='$_POST[phone]', Email='$_POST[email]' where RC='$_POST[hidden]'";
+	if($_POST['sm'] != 'F' and $_POST['sm'] != 'T')
+		die("Nespravne zadana hodnota 'umi smycec'! Zadejte T/F!<br><a href=\"personel.php\">Znovu nacist</a>");
+	
+	if($_POST['d'] != 'F' and $_POST['d'] != 'T')
+		die("Nespravne zadana hodnota 'umi dech'! Zadejte T/F!<br><a href=\"personel.php\">Znovu nacist</a>");
+	
+	if($_POST['str'] != 'F' and $_POST['str'] != 'T')
+		die("Nespravne zadana hodnota 'umi strunny'! Zadejte T/F!<br><a href=\"personel.php\">Znovu nacist</a>");
+	
+	$updateQry = "update musicians set Name='$_POST[name]', SName='$_POST[Sname]', Town='$_POST[town]', RC='$_POST[rc]', Phone='$_POST[phone]', Email='$_POST[email]', Sm='$_POST[sm]', D='$_POST[d]', Str='$_POST[str]' where RC='$_POST[hidden]'";
 
 	mysql_query($updateQry, $_SESSION['db']);
 };
@@ -112,6 +121,9 @@ echo "<table border=1>
 		<th>Mesto</th>
 		<th>Telefon</th>
 		<th>Email</th>
+		<th>Umi smycec</th>
+		<th>Umi dech</th>
+		<th>Umi strunny</th>
 		</tr>";
 
 while($row = mysql_fetch_array($retval)){
@@ -122,7 +134,10 @@ while($row = mysql_fetch_array($retval)){
 	echo "<td>" . "<input type=text name=rc value=" . $row['RC'] . " </td>";
 	echo "<td>" . "<input type=text name=town value='" . $row['Town'] . "' </td>";
 	echo "<td>" . "<input type=text name=phone value='" . $row['Phone'] . "' </td>";
-	echo "<td>" . "<input type=text name=email value=" . $row['Email'] . " </td>";
+	echo "<td>" . "<input type=text name=email value=" . $row['Email'] . " </td>";	
+	echo "<td>" . "<input type=text name=sm value=" . $row['Sm'] . " </td>";
+	echo "<td>" . "<input type=text name=d value=" . $row['D'] . " </td>";
+	echo "<td>" . "<input type=text name=str value=" . $row['Str'] . " </td>";
 	echo "<td>" . "<input type=hidden name=hidden value=" . $row['RC'] . " </td>";
 	echo "<td>" . "<input type=submit name=updatebtn value=Upravit" . " </td>";
 	echo "<td>" . "<input type=submit name=deletebtn value=Odstranit" . " </td>";
