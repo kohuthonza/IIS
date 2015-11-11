@@ -31,12 +31,14 @@ Přidat uživatele
 			<div class="col-lg-4">
 				<input type="text" class="form-control input-lg" id="first_name" placeholder="Jméno" name="name" required>
 			</div>
+			<label for="first_name" class="control-label input-lg text-right">*</label>
 		</div>
 		<div class="form-group row">
 			<label for="second_name" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Příjmení</label>
 			<div class="col-lg-4">
 				<input type="text" class="form-control input-lg" id="second_name" placeholder="Příjmení" name="sname" required>
 			</div>
+			<label for="second_name" class="control-label input-lg text-right">*</label>
 		</div>
 		<div class="form-group row">
 			<label for="birth_date" class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Datum narození</label>
@@ -64,11 +66,12 @@ Přidat uživatele
 					<?php endfor; ?>
 				</select>
 			</div>
+			<label for="birth_date" class="control-label input-lg text-right">*</label>
 		</div>
 		<div class="form-group row">
 			<label for="tel" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Telefon</label>
 			<div class="col-lg-4">
-				<input type="tel" class="form-control input-lg" id="tel" placeholder="Telefon" required>
+				<input type="tel" class="form-control input-lg" id="tel" placeholder="Telefon">
 			</div>
 		</div>
 		<div class="form-group row">
@@ -76,23 +79,26 @@ Přidat uživatele
 			<div class="col-lg-4">
 				<select required class="form-control input-lg" id="role" name="role">
 					<option value="" disabled selected>Vyberte roli</option>
-					<option value="1">Správce personálu</option>
+					<option value="1">Správce hudebíků</option>
 					<option value="2">Správce koncertů</option>
 					<option value="3">Správce skladeb</option>	
 				</select>
 			</div>
+			<label for="role" class="control-label input-lg text-right">*</label>
 		</div>
 		<div class="form-group row">
 			<label for="login" class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Přihlašovací jméno</label>
 			<div class="col-lg-4">
 				<input type="text" class="form-control input-lg" id="login" placeholder="Přihlašovací jméno" name="login" required>
 			</div>
+			<label for="login" class="control-label input-lg text-right">*</label>
 		</div>
 		<div class="form-group row">
 			<label for="passwd" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Heslo</label>
 			<div class="col-lg-4">
 				<input type="password" class="form-control input-lg" id="passwd" placeholder="Heslo" name="passwd" required>
 			</div>
+			<label for="passwd" class="control-label input-lg text-right">*</label>
 		</div>
 		<div class="form-group row">
 			<div class="col-lg-2 col-lg-offset-3">
@@ -104,7 +110,7 @@ Přidat uživatele
 		</div>
 		<div class="form-group row">
 			<div class="col-lg-4 col-lg-offset-3">
-				<strong>*Všechny údaje jsou povinné</strong>
+				<strong>Všechny údaje označené * jsou povinné</strong>
 			</div>
 		</div>
 	</form>
