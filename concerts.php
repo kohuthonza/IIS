@@ -14,8 +14,8 @@ if($_SESSION['role'] != 2){
 }
 ?>
 
-<a href="add_concert.php">pridat koncert</a>
-
+<a href="add_concert.php">pridat koncert</a><br>
+<a href="index.php">Zpet na hlavni stranu</a><br>
 <?php
 
 if(!db_connect())
@@ -46,9 +46,10 @@ die(mysql_error());
 			$row=mysql_fetch_row($fetch); 
 ?>
 			<form method=post action=show_concert.php>
-			<tr>
+			<tr>				
 				<td><input type=hidden name=Cname value="<?php echo $row[1]; ?>"></input><?php echo $row[1]; ?></td>
 				<td><input type=hidden name=Cdate value="<?php echo $row[2]; ?>"></input><?php echo $row[2]; ?></td>
+				<td><input type=hidden name=CID value="<?php echo $row[0]; ?>"></input></td>
 				<td><input type=submit name=select value=Vybrat></td>
 			</tr>
 			</form>

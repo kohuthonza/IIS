@@ -55,7 +55,7 @@ if(isset($_POST['addC'])){
 			echo "pridavam hudebniky s RC:<br>";
 			foreach ($_SESSION['musics'] as $selectedOption){
 				echo $selectedOption."<br>";
-				$SQL = "insert into obsazeni (concert_date, comp_ID, musician_ID) values ('$_SESSION[conct_date]', '1', $selectedOption)";
+				$SQL = "insert into concert_musician (concert_ID, music_RC) values ('$idx', $selectedOption)";
 				mysql_query($SQL, $_SESSION['db']);
 			}
 			
@@ -98,7 +98,7 @@ if(!db_connect())
 	die('Nepodarilo se pripojit k databazi');
 
 
-$SQL2 = "select RC, Name, SName from musicians where RC not in (SELECT musician_ID FROM `obsazeni` WHERE concert_date = '$_SESSION[conct_date]')";
+$SQL2 = "select RC, Name, SName from musicians where RC not in (SELECT music_RC FROM concert_musician WHERE concert_ID in (select concert_ID from concerts where Date='$_POST[date]'))";
 
 $retval2 = mysql_query($SQL2, $_SESSION['db']);
 
