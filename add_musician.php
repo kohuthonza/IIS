@@ -99,13 +99,16 @@ Přidat hudebníka
 				<label class="checkbox-inline"><input type="checkbox" name="str" value="">Strunné</label>
 			</div>
 			</div>
-			<label class="control-label input-lg text-left">*</label>
-			</label>
 		</div>
 		</h3>
 		<div class="form-group row">
 			<div class="col-lg-2 col-lg-offset-3">
 				<button class="btn btn-success btn-lg" type="submit">Přidat hudebníka</button>
+			</div>
+			<div class="col-lg-2">
+			    <span class="pull-right">
+				<a class="btn btn-warning btn-lg" href="personel.php" role="button">Zpět na hudebníky</a>
+				</span>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -113,15 +116,6 @@ Přidat hudebníka
 				<strong>Všechny údaje označené * jsou povinné</strong>
 			</div>
 		</div>
-		<div class="form-group row">
-			<div class="col-lg-2">
-				<a class="btn btn-warning btn-lg" href="index.php" role="button">Zpět na hlavní stranu</a>
-			</div>
-			<div class="col-lg-2">
-				<a class="btn btn-warning btn-lg" href="personel.php" role="button">Zpět na hudebníky</a>
-			</div>
-		</div>
-
 
 
 
