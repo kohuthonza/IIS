@@ -94,9 +94,9 @@ Přidat hudebníka
 			<label class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Hraje na nástroje</label>
 			<div class="col-lg-4">
 			<div class="checkbox">
-				<label class="checkbox-inline"><input type="checkbox" value="">Smyčcové</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Dechové</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Strunné</label>
+				<label class="checkbox-inline"><input type="checkbox" name="sm" value="">Smyčcové</label>
+				<label class="checkbox-inline"><input type="checkbox" name="d" value="">Dechové</label>
+				<label class="checkbox-inline"><input type="checkbox" name="str" value="">Strunné</label>
 			</div>
 			</div>
 			<label class="control-label input-lg text-left">*</label>
@@ -150,18 +150,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$email = htmlspecialchars($_POST['email']);
 	$town = htmlspecialchars($_POST['town']);
 	
-	$str = htmlspecialchars($_POST['str']);
-	$d = htmlspecialchars($_POST['d']);
-	$sm = htmlspecialchars($_POST['sm']);
+	$str = 'F';
+	$d = 'F';
+	$sm = 'F';	
 	
-	if($str != 'F' and $str != 'T')
-		die("Nespravna hodnota u 'Umi strunny'! Zadejte T/F.");
-			
-	if($sm != 'F' and $sm != 'T')
-		die("Nespravna hodnota u 'Umi smycec'! Zadejte T/F.");
-			
-	if($d != 'F' and $d != 'T')
-		die("Nespravna hodnota u 'Umi dech'! Zadejte T/F.");
+	if(isset($_POST['str']))
+		$str = 'T';
+
+	if(isset($_POST['sm']))
+		$sm = 'T';
+
+	if(isset($_POST['d']))
+		$d = 'T';	
 			
 	if(strlen($rc) != 11)
 		die("Nespravna delka rodneho cisla!");
