@@ -71,7 +71,7 @@ if($_SESSION['role'] != 1){
 		<th>Město</th>
 		<th>Telefon</th>
 		<th>E-mail</th>
-		<th><button class="btn btn-md" type="submit" name="clear">Vyčistit</button></th>
+		<th><button class="btn btn-md" type="submit" name="clear"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></th>
 		</tr>
 </form>		
 <form method=post action=personel.php>
@@ -82,7 +82,7 @@ if($_SESSION['role'] != 1){
 	<td><input type=text name=Ftown value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftown'])){ echo $_POST['Ftown'];}?>'> </td>
 	<td><input type=text name=Fphone value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fphone'])){ echo $_POST['Fphone'];}?>'> </td>
 	<td><input type=text name=Femail value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Femail'])){ echo $_POST['Femail'];}?>> </td>
-	<td><button class="btn btn-md" type="submit" name="filter">Filtrovat</button></td>
+	<td><button class="btn btn-md" type="submit" name="filter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></td>
 </form>
 </table> 
 
