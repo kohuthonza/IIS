@@ -2,6 +2,9 @@
 include_once('functions.php');
 session_save_path("./tmp");
 session_start();
+if(!isset($_SESSION['logged'])){
+	header('Location: index.php');
+}
 if($_SESSION['role'] != 2){
 	$val = $_SESSION['role'];
 	die("<html>
@@ -23,6 +26,8 @@ Pridat koncert
 Prosim, vyplnte nasledujici formulare pro pridani koncertu:
 <br><br>
 <form method="post" action="add_concert1.php">
+	Zadejte nazev koncertu:<br>
+	<input type="text" name="Cname"><br>
 	Vyberte skladby pozadovane pro koncert: <br>
 	<select name="comps[]" multiple>
 	

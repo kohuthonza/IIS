@@ -2,7 +2,9 @@
 session_save_path("./tmp");
 session_start();
 include_once('functions.php');
-
+if(!isset($_SESSION['logged'])){
+	header('Location: index.php');
+}
 
 if($_SESSION['role'] != 3){
 	$val = $_SESSION['role'];

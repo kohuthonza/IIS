@@ -26,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	else{
 		session_destroy();
 		$_SESSION = array();
+		//mysql_close($_SESSION['db']);
 		//unset($_SESSION['logged']);
 		echo "byl jste odhlasen<br>";
 		echo "<a href=\"index.php\">Zpet na hlavni stranu</a>";

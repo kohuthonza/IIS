@@ -2,6 +2,9 @@
 include_once('functions.php');
 session_save_path("./tmp");
 session_start();
+if(!isset($_SESSION['logged'])){
+	header('Location: index.php');
+}
 if($_SESSION['role'] != 3){
 	$val = $_SESSION['role'];
 	die("Na tuto stranku nemate pristup! Vase role: $val. Potrebna role: 3<br>
