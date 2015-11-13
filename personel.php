@@ -71,6 +71,10 @@ if($_SESSION['role'] != 1){
 		<th>Město</th>
 		<th>Telefon</th>
 		<th>E-mail</th>
+		
+		<th>Umi smycec</th>
+		<th>Umi dech</th>
+		<th>Umi strunny</th>
 		<th><button class="btn btn-md" type="submit" name="clear"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></th>
 		</tr>
 </form>		
@@ -82,6 +86,10 @@ if($_SESSION['role'] != 1){
 	<td><input type=text name=Ftown value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftown'])){ echo $_POST['Ftown'];}?>'> </td>
 	<td><input type=text name=Fphone value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fphone'])){ echo $_POST['Fphone'];}?>'> </td>
 	<td><input type=text name=Femail value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Femail'])){ echo $_POST['Femail'];}?>> </td>
+	
+	<td><input type=text name=Fsm value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsm'])){ echo $_POST['Fsm'];}?>> </td>
+	<td><input type=text name=Fd value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fd'])){ echo $_POST['Fd'];}?>> </td>
+	<td><input type=text name=Fstr value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fstr'])){ echo $_POST['Fstr'];}?>> </td>
 	<td><button class="btn btn-md" type="submit" name="filter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></td>
 </form>
 </table> 
@@ -148,6 +156,19 @@ if(isset($_POST['filter'])){
 		$where = " and";
 	}
 	
+	if(!empty($_POST['Fsm'])){
+		$SQL = $SQL . " $where Sm='$_POST[Fsm]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Fd'])){
+		$SQL = $SQL . " $where D='$_POST[Fd]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Fstr'])){
+		$SQL = $SQL . " $where Str='$_POST[Fstr]'";
+		$where = " and";
+	}
+	
 };
 #echo $SQL;
 
@@ -178,7 +199,7 @@ while($row = mysql_fetch_array($retval)){
 	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=sm value=" . $row['Sm'] . " </td>";
 	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=d value=" . $row['D'] . " </td>";
 	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=str value=" . $row['Str'] . " </td>";
-	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=hidden name=hidden </td>";
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=hidden name=hidden value=" . $row['RC'] . " </td>";
 	echo "<td class=\"col-lg-1\">" . "<button class=\"btn btn-md btn-success\" type=\"submit\" name=\"updatebtn\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></button>" . " </td>";
 	echo "<td class=\"col-lg-1\">" . "<button class=\"btn btn-md btn-danger\" type=\"submit\" name=\"deletebtn\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button>" . " </td>";
 	echo "</tr>";
