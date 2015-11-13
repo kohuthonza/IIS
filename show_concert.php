@@ -40,6 +40,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$SQL = "UPDATE concerts SET Name='$_POST[cname]', Date='$_POST[cdate]' WHERE ID='$concert_ID'";
 		mysql_query($SQL, $_SESSION['db']);
 		echo mysql_error();
+		
+		//projit vsechny musicians_to_add
+		if(isset($_POST['musicians_to_add']))
+			foreach ($_POST['musicians_to_add'] as $selectedOption){
+					echo $selectedOption."<br>";				
+					$SQL = "insert into concert_musician (concert_ID, music_RC) values ('$concert_ID', '$selectedOption')";
+					mysql_query($SQL, $_SESSION['db']);	
+			}
+			
+			
+		//prjit vsehny comps_to_add
+		if(isset($_POST['comps_to_add']))
+			foreach ($_POST['comps_to_add'] as $selectedOption){
+					echo $selectedOption."<br>";				
+					$SQL = "insert into concert_composition (concert_ID, comp_ID) values ('$concert_ID', '$selectedOption')";
+					mysql_query($SQL, $_SESSION['db']);	
+			}
+			
 		die("ulozeno!</form>");
 		
 	}else{
@@ -56,7 +74,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		echo "Hudebnici v koncertu:<br>";
 		
 		$SQL = "select Name, SName from musicians where RC in (select music_RC from concert_musician where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[CID]'))";
-		//$SQL = "select Name, SName from musicians where RC in (select musician_ID from obsazeni where concert_date='$_POST[Cdate]')";
 		$retval = mysql_query($SQL, $_SESSION['db']);
 		echo(mysql_error());
 
@@ -65,12 +82,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		}
 		
 		echo "<br>Muzete pridat nasledujici hudebniky:<br>";
-		//$SQL = "select Name, SName, RC from musicians where RC not in (select musician_ID from obsazeni where concert_date='$_POST[Cdate]')";
 		$SQL = "select Name, SName, RC from musicians where RC not in (select music_RC from concert_musician where concert_ID in (select ID from concerts where Date='$_POST[Cdate]'))";
 		$retval = mysql_query($SQL, $_SESSION['db']);
 		echo(mysql_error());
 ?>
-		<select multiple name="musicians_to_add[]">
+		<select name="musicians_to_add[]" multiple>
 <?php
 		while($row = mysql_fetch_array($retval)){
 			echo "<option value=" . $row['RC'] . ">" . $row['Name'] ." " . $row['SName'] . "</option>";
@@ -96,7 +112,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$retval = mysql_query($SQL, $_SESSION['db']);
 		echo(mysql_error());
 ?>
-		<select multiple name="comps_to_add[]">
+		<select name="comps_to_add[]" multiple>
 <?php
 		while($row = mysql_fetch_array($retval)){
 			echo "<option value=" . $row['ID'] . ">" . $row['Name'] . "</option>";
