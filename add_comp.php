@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 include_once('functions.php');
 session_save_path("./tmp");
 session_start();
@@ -14,13 +15,21 @@ if($_SESSION['role'] != 3){
 ?>
 
 <html>
-<title>
-Pridat skladbu
-</title>
+<head>
 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<title>
+Přidat skladbu
+</title>
+</head>
 <body>
 
-Prosim, vyplnte udaje o skladbe:
+
+
 <form method="post" action="add_comp.php">
 	Nazev skladby:<br>
 	<input type="text" name="name">*<br><br>
