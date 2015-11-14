@@ -48,7 +48,7 @@ if(isset($_POST['addC'])){
 			$_SESSION['musics'] = $_POST['musics'];
 			echo "pridavam skladby s ID:<br>";	
 			foreach ($_SESSION['compositions'] as $selectedOption){
-				echo $selectedOption."<br>";				
+				echo $selectedOption."<br>";		
 				$SQL = "insert into concert_composition (concert_ID, comp_ID) values ('$idx', '$selectedOption')";
 				mysql_query($SQL, $_SESSION['db']);		
 			}

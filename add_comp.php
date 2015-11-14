@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: text/html; charset=UTF-8");
 include_once('functions.php');
 session_save_path("./tmp");
 session_start();
@@ -15,26 +14,22 @@ if($_SESSION['role'] != 3){
 ?>
 
 <html>
-<head>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
 <title>
-Přidat skladbu
+Pridat skladbu
 </title>
-</head>
+
 <body>
 
-
-
+Prosim, vyplnte udaje o skladbe:
 <form method="post" action="add_comp.php">
 	Nazev skladby:<br>
 	<input type="text" name="name">*<br><br>
 	Tonina:<br>
 	<input type="text" name="key">*<br><br>
+	Takt:<br>
+	<input type="text" name="takt">*<br><br>
+	Tempo:<br>
+	<input type="text" name="tempo">*<br><br>
 	Pocet smyccovych nastroju:<br>
 	<input type="text" name="sm">*<br><br>
 	Pocet dechovych nastroju:<br>
@@ -60,6 +55,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$name = htmlspecialchars($_POST['name']);
 	$key = htmlspecialchars($_POST['key']);
+	$takt = htmlspecialchars($_POST['takt']);
+	$tempo = htmlspecialchars($_POST['tempo']);
 	$sm = htmlspecialchars($_POST['sm']);
 	$d = htmlspecialchars($_POST['d']);
 	$str = htmlspecialchars($_POST['str']);
@@ -67,8 +64,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 	$db = $_SESSION['db'];
 
-	$cmmnd = "insert into compositions (ID, Name, Comp_Key, Sm, D, Str) values (NULL, '$name', '$key', '$sm', '$d', '$str')";
-			
+	$cmmnd = "insert into compositions (ID, Name, Comp_Key, Takt, Tempo, Sm, D, Str) values (NULL, '$name', '$key', $takt, $tempo, '$sm', '$d', '$str')";
+	echo $cmmnd;	
 	if(mysql_query($cmmnd, $db)){
 		echo "pridano";
 	}

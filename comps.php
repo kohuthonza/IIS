@@ -54,7 +54,7 @@ if(!db_connect())
 
 //if the page recieved a command to update a specific row of the table
 if(isset($_POST['updatebtn'])){
-	$updateQry = "update compositions set Name='$_POST[name]', Comp_Key='$_POST[key]', Sm='$_POST[sm]', D='$_POST[d]', Str='$_POST[str]' where ID=$_POST[hidden]";
+	$updateQry = "update compositions set Name='$_POST[name]', Comp_Key='$_POST[key]', Takt='$_POST[takt]', Tempo='$_POST[tempo]', Sm='$_POST[sm]', D='$_POST[d]', Str='$_POST[str]' where ID=$_POST[hidden]";
 
 	#echo $updateQry;
 	mysql_query($updateQry, $_SESSION['db']);
@@ -87,7 +87,9 @@ $retval = mysql_query($SQL, $_SESSION['db']);
 echo "<table border=1>
 		<tr>
 		<th>Nazev</th>
-		<th>Tonina</th>		
+		<th>Tonina</th>	
+		<th>Takt</th>	
+		<th>Tempo</th>			
 		<th># Smyccu</th>
 		<th># Dechu</th>
 		<th># Strunnych</th>
@@ -98,6 +100,8 @@ while($row = mysql_fetch_array($retval)){
 	echo "<tr>";
 	echo "<td>" . "<input type=text name=name value='" . $row['Name'] . "' </td>";
 	echo "<td>" . "<input type=text name=key value='" . $row['Comp_Key'] . "' </td>";
+	echo "<td>" . "<input type=text name=takt value='" . $row['Takt'] . "' </td>";
+	echo "<td>" . "<input type=text name=tempo value='" . $row['Tempo'] . "' </td>";
 	echo "<td>" . "<input type=text name=sm value='" . $row['Sm'] . "' </td>";
 	echo "<td>" . "<input type=text name=d value='" . $row['D'] . "' </td>";
 	echo "<td>" . "<input type=text name=str value='" . $row['Str'] . "' </td>";
