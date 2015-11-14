@@ -64,8 +64,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 	$db = $_SESSION['db'];
 
-	$cmmnd = "insert into compositions (ID, Name, Comp_Key, Takt, Tempo, Sm, D, Str) values (NULL, '$name', '$key', $takt, $tempo, '$sm', '$d', '$str')";
-	echo $cmmnd;	
+	$cmmnd = "insert into compositions (ID, Name, Comp_Key, Takt, Tempo, Sm, D, Str) values (NULL, '$name', '$key', '$takt', '$tempo', '$sm', '$d', '$str')";
+	//echo $cmmnd;	
 	if(mysql_query($cmmnd, $db)){
 		echo "pridano";
 	}
