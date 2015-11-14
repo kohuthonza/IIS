@@ -13,7 +13,13 @@ if($_SESSION['role'] != 2){
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
 		</body></html>
 		");
+	
+
 }
+
+if(!isset($_POST['CID']))
+	die("Neni vybran zadny koncert!<br><a href=\"concerts.php\">Zpet na vyber koncertu</a>");
+		
 ?>
 <a href="index.php">Zpet na hlavni stranu</a><br>
 <a href="concerts.php">Zpet na koncerty</a><br>
@@ -114,14 +120,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}*/
 	
 	echo "<br>Muzete pridat nasledujici hudebniky:<br>";
-	$SQL = "select Name, SName, RC from musicians where RC not in (select music_RC from concert_musician where concert_ID in (select ID from concerts where Date='$_POST[Cdate]'))";
+	$SQL = "select Name, SName, RC, Sm, D, Str from musicians where RC not in (select music_RC from concert_musician where concert_ID in (select ID from concerts where Date='$_POST[Cdate]'))";
 	$retval = mysql_query($SQL, $_SESSION['db']);
 	echo(mysql_error());
 ?>
 	<select name="musicians_to_add[]" multiple>
 <?php
 	while($row = mysql_fetch_array($retval)){
-		echo "<option value=" . $row['RC'] . ">" . $row['Name'] ." " . $row['SName'] . "</option>";
+		echo "<option value=" . $row['RC'] . ">" . $row['Name'] ." " . $row['SName'] . " ($row[Sm]) ($row[D]) ($row[Str])" . "</option>";
 	}		
 ?>
 	</select>
@@ -130,7 +136,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 		
 	echo "<br>Muzete pridat nasledujici skladby:<br>";
-	$SQL = "select Name, ID from compositions where ID not in (select comp_ID from concert_composition where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[Cdate]'))";
+	$SQL = "select Name, ID, Sm, D, Str from compositions where ID not in (select comp_ID from concert_composition where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[Cdate]'))";
 	
 	$retval = mysql_query($SQL, $_SESSION['db']);
 	echo(mysql_error());
@@ -138,7 +144,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<select name="comps_to_add[]" multiple>
 <?php
 	while($row = mysql_fetch_array($retval)){
-		echo "<option value=" . $row['ID'] . ">" . $row['Name'] . "</option>";
+		echo "<option value=" . $row['ID'] . ">" . $row['Name'] . " ($row[Sm]) ($row[D]) ($row[Str])" . "</option>";
 	}		
 ?>
 	</select>
@@ -156,13 +162,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <?php
 	echo "Hudebnici v koncertu:<br>";
 	
-	$SQL = "select Name, SName, RC from musicians where RC in (select music_RC from concert_musician where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[CID]'))";
+	$SQL = "select Name, SName, RC, Sm, D, Str from musicians where RC in (select music_RC from concert_musician where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[CID]'))";
 	$retval = mysql_query($SQL, $_SESSION['db']);
 	echo(mysql_error());
 
 	while($row = mysql_fetch_array($retval)){
 		echo "<form method=post action=show_concert.php>
-				<input type=text value=\"$row[Name]" . " " . $row['SName'] . "\">
+				<input type=text value=\"$row[Name]" . " " . $row['SName'] . " ($row[Sm]) ($row[D]) ($row[Str])" . "\">
 				<input type=submit value=\"Odstranit hudebnika\">" . 
 				"<input type=hidden name=deleteMID value=$row[RC]>".
 				"<input type=hidden name=CID value=$_POST[CID]>" . 
@@ -172,13 +178,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 	
 	echo "Skladby v koncertu:<br>";
-	$SQL = "select Name, ID from compositions where ID in (select comp_ID from concert_composition where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[Cdate]'))";
+	$SQL = "select Name, ID, Sm, D, Str from compositions where ID in (select comp_ID from concert_composition where concert_ID = $_POST[CID])";//in (select ID from concerts where Date='$_POST[Cdate]'))";
 	$retval = mysql_query($SQL, $_SESSION['db']);
 	echo(mysql_error());
 
 	while($row = mysql_fetch_array($retval)){
 		echo "<form method=post action=show_concert.php>
-				<input type=text value=\"$row[Name]\">
+				<input type=text value=\"$row[Name] ($row[Sm]) ($row[D]) ($row[Str])\">
 				<input type=submit value=\"Odstranit skladbu\">" . 
 				"<input type=hidden name=deleteCompID value=$row[ID]>".
 				"<input type=hidden name=CID value=$_POST[CID]>" . 
