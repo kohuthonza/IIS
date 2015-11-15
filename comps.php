@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 session_save_path("./tmp");
 session_start();
 include_once('functions.php');
@@ -18,26 +19,60 @@ if($_SESSION['role'] != 3){
 <html>
 <head>
 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
 <title>Seznam skladeb</title>
 </head>
 <body>
+<div class="container-fluid">
 
-Zaznamy o skladbach:<br>
+<div class="row">
+		&nbsp;
+	</div>
+	
+	
 
-<a href="index.php">Zpet na hlavni stranu</a>
-<br>
-<a href="add_comp.php">Pridat skladbu</a>
-<table border=1>
+	<div class="form-group row">
+		<div class="col-lg-2">
+		    <form action="add_comp.php">
+			<button class="btn btn-lg" type="submit">Přidat skladbu</button>
+			</form>
+		</div>
+		<div class="col-lg-2 col-lg-offset-3">
+		    <form action="index.php">
+			<span class="pull-right">
+			<button class="btn btn-lg" type="submit">Zpět na hlavní stranu</button>
+			</span>
+			</form>
+		</div>
+		<div class="col-lg-2 col-lg-offset-3">
+			<form action="power.php?logout=1" method="post">
+				<span class="pull-right">
+				<button class="btn btn btn-lg" type="submit">Odhlásit se</button>
+				</span>
+			</form>
+		</div>
+	</div>
+	
+	<div class="row">
+		&nbsp;
+	</div>
+
+
+<table class="table table-bordered table-condensed">
 		<tr>	
-		<th>Nazev</th>
-		<th>Tonina</th>
-		<th><form method=post action=comps.php><input type=submit name=clear value=Vycistit></form></td>
+		<th>Název</th>
+		<th>Tónina</th>
+		<th><form method="post" action="comps.php"><button class="btn btn-md" type="submit" name="clear"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></form></td>
 		</tr>
-<form method=post action=comps.php>
+<form method="post" action="comps.php">
 	<tr>
-	<td><input type=text name=Fname value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fname'])){ echo $_POST['Fname'];}?>'> </td>
-	<td><input type=text name=Fkey value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fkey'])){ echo $_POST['Fkey'];}?>'> </td>
-	<td><input type=submit name=filter value=Filtrovat></td>
+	<td><input type="text" name="Fname" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fname'])){ echo $_POST['Fname'];}?>'> </td>
+	<td><input type="text" name="Fkey" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fkey'])){ echo $_POST['Fkey'];}?>'> </td>
+	<td><button class="btn btn-md" type="submit" name="filter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></td>
 </form>
 </table>
 
@@ -84,30 +119,30 @@ if(isset($_POST['filter'])){
 
 $retval = mysql_query($SQL, $_SESSION['db']);
 
-echo "<table border=1>
-		<tr>
-		<th>Nazev</th>
-		<th>Tonina</th>	
+echo "<table class=\"table table-bordered table-hover table-condensed\">
+		<tr class=\"info\">
+		<th>Název</th>
+		<th>Tónina</th>	
 		<th>Takt</th>	
 		<th>Tempo</th>			
-		<th># Smyccu</th>
-		<th># Dechu</th>
-		<th># Strunnych</th>
+		<th>Počet smyčců</th>
+		<th>Počet dechů</th>
+		<th>Počet strunných</th>
 		</tr>";
 
 while($row = mysql_fetch_array($retval)){
 	echo "<form method=post action=comps.php>";
-	echo "<tr>";
-	echo "<td>" . "<input type=text name=name value='" . $row['Name'] . "' </td>";
-	echo "<td>" . "<input type=text name=key value='" . $row['Comp_Key'] . "' </td>";
-	echo "<td>" . "<input type=text name=takt value='" . $row['Takt'] . "' </td>";
-	echo "<td>" . "<input type=text name=tempo value='" . $row['Tempo'] . "' </td>";
-	echo "<td>" . "<input type=text name=sm value='" . $row['Sm'] . "' </td>";
-	echo "<td>" . "<input type=text name=d value='" . $row['D'] . "' </td>";
-	echo "<td>" . "<input type=text name=str value='" . $row['Str'] . "' </td>";
+	echo "<tr class=\"warning\">";
+	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=name value='" . $row['Name'] . "' </td>";
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=key value='" . $row['Comp_Key'] . "' </td>";
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=takt value='" . $row['Takt'] . "' </td>";
+	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=tempo value='" . $row['Tempo'] . "' </td>";
+	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=sm value='" . $row['Sm'] . "' </td>";
+	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=d value='" . $row['D'] . "' </td>";
+	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=str value='" . $row['Str'] . "' </td>";
 	echo "<td>" . "<input type=hidden name=hidden value=" . $row['ID'] . " </td>";
-	echo "<td>" . "<input type=submit name=updatebtn value=Upravit" . " </td>";
-	echo "<td>" . "<input type=submit name=deletebtn value=Odstranit" . " </td>";
+	echo "<td class=\"col-lg-1\">" . "<button class=\"btn btn-md btn-success\" type=\"submit\" name=\"updatebtn\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></button>" . " </td>";
+	echo "<td class=\"col-lg-1\">" . "<button class=\"btn btn-md btn-danger\" type=\"submit\" name=\"deletebtn\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button>" . " </td>";
 	echo "</tr>";
 	echo "</form>";
 }
@@ -115,6 +150,6 @@ echo "</table>";
 mysql_close($_SESSION['db']);
 
 ?>
-
+</div>
 </body>
 </html>
