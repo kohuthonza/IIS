@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 session_save_path("./tmp");
 session_start();
 include_once('functions.php');
@@ -14,8 +15,58 @@ if($_SESSION['role'] != 2){
 }
 ?>
 
-<a href="add_concert.php">pridat koncert</a><br>
-<a href="index.php">Zpet na hlavni stranu</a><br>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<title>Seznam koncertů</title>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<div class="row">
+		&nbsp;
+	</div>
+	
+	
+
+	<div class="form-group row">
+		<div class="col-lg-2">
+		    <form action="add_concert.php">
+			<button class="btn btn-lg" type="submit">Přidat koncert</button>
+			</form>
+		</div>
+		<div class="col-lg-2 col-lg-offset-3">
+		    <form action="index.php">
+			<span class="pull-right">
+			<button class="btn btn-lg" type="submit">Zpět na hlavní stranu</button>
+			</span>
+			</form>
+		</div>
+		<div class="col-lg-2 col-lg-offset-3">
+			<form action="power.php?logout=1" method="post">
+				<span class="pull-right">
+				<button class="btn btn btn-lg" type="submit">Odhlásit se</button>
+				</span>
+			</form>
+		</div>
+	</div>
+	
+	<div class="row">
+		&nbsp;
+	</div>
+
+
+
+
+
+
 <?php
 
 if(!db_connect())
@@ -40,17 +91,17 @@ die(mysql_error());
    $num=Mysql_num_rows($fetch);
         if($num>0)
         {
-        echo "<table class=\"table\" id=\"adjudication\">";
-        echo "<tr><th>Nazev koncertu</th><th>Datum oncertu</th></tr>";
+        echo "<table class=\"table-bordered table-condensed\">";
+        echo "<tr><th>Název koncertu</th><th>Datum koncertu</th></tr>";
         for($i=0;$i<$num;$i++){
 			$row=mysql_fetch_row($fetch); 
 ?>
-			<form method=post action=show_concert.php>
+			<form method="post" action="show_concert.php">
 			<tr>				
-				<td><input type=hidden name=Cname value="<?php echo $row[1]; ?>"></input><?php echo $row[1]; ?></td>
-				<td><input type=hidden name=Cdate value="<?php echo $row[2]; ?>"></input><?php echo $row[2]; ?></td>
-				<td><input type=hidden name=CID value="<?php echo $row[0]; ?>"></input></td>
-				<td><input type=submit name=select value=Vybrat></td>
+				<td><input type="hidden" name="Cname" value="<?php echo $row[1]; ?>"></input><?php echo $row[1]; ?></td>
+				<td><input type="hidden" name="Cdate" value="<?php echo $row[2]; ?>"></input><?php echo $row[2]; ?></td>
+				<td><input type="hidden" name="CID" value="<?php echo $row[0]; ?>"></input></td>
+				<td><button class="btn btn-md btn-success" type="submit" name="select"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></td>
 			</tr>
 			</form>
 <?PHP       
@@ -61,11 +112,31 @@ die(mysql_error());
 
 
 
+
 <?php
-echo '<div class="pagination"><ul><li class="next"><a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+10).'">Next</a></li>';
 
 $prev = $startrow - 10;
 
-if ($prev >= 0)
-    echo '<li class="prev"><a href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'">Previous</a></li></ul></div>';
+if ($prev >= 0){
+    echo "
+	   <div class=\"form-group row\">
+	   <div class=\"col-lg-2\">
+	   <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".$prev.">".
+      "<button class=\"btn btn-md btn-danger\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></span></span></button>".
+	  "</form></div>";
+}
+else
+    echo "<div class=\"form-group row\">";
+
+echo "<div class=\"col-lg-2\">
+      <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".($startrow+10).">".
+      "<button class=\"btn btn-md btn-success\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-right\" aria-hidden=\"true\"></span></span></button>".
+	  "</form>
+	   </div>
+	   </div>";
+
 ?>
+
+</div>
+</body>
+</html>
