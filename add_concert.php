@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 include_once('functions.php');
 session_save_path("./tmp");
 session_start();
@@ -16,41 +17,88 @@ if($_SESSION['role'] != 2){
 }
 ?>
 <html>
-<title>
-Pridat koncert
-</title>
+<head>
 
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+	body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_concerts_background.png);
+		  background-repeat: no-repeat;
+		  background-position: 90% 37px;}
+</style>
+
+<title>
+Přidat koncert
+</title>
+</head>
 <body>
 
+<div class="container-fluid">
 
-Prosim, vyplnte nasledujici formulare pro pridani koncertu:
-<br><br>
-<form method="post" action="add_concert1.php">
-	Zadejte nazev koncertu:<br>
-	<input type="text" name="Cname"><br>
-	Vyberte skladby pozadovane pro koncert: <br>
-	<select name="comps[]" multiple>
-	
-<?php
-if(!db_connect())
-	die('Nepodarilo se pripojit k databazi');
+<form class="form-horizontal" method="post" action="add_concert1.php">
+		<div class="form-group row">
+			&nbsp;
+		</div>
+		<div class="form-group row">
+			<label for="con_name" class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Název koncertu</label>
+			<div class="col-lg-4">
+				<input type="text" class="form-control input-lg" id="con_name" placeholder="Název koncertu" name="Cname" required>
+			</div>
+			<label for="con_name" class="control-label input-lg text-right">*</label>
+		</div>
+		<div class="form-group row">
+			<label for="comp_list" class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Skladby</label>
+			<div class="col-lg-4">
+				<select name="comps[]" multiple class="form-control" size="22" required>
+					<?php
+						if(!db_connect())
+							die('Nepodarilo se pripojit k databazi');
 
-$SQL2 = "select ID, Name from compositions";
-$retval2 = mysql_query($SQL2, $_SESSION['db']);
+						$SQL2 = "select ID, Name from compositions";
+						$retval2 = mysql_query($SQL2, $_SESSION['db']);
 
-while($row2 = mysql_fetch_array($retval2)){
-	echo "<option value=" . $row2['ID'] . ">" . $row2['Name'] . "</option>";
-}
+						while($row2 = mysql_fetch_array($retval2)){
+							echo "<option value=" . $row2['ID'] . ">" . $row2['Name'] . "</option>";
+						}
 
-$_SESSION['concert_added'] = false;
+						$_SESSION['concert_added'] = false;
 
-mysql_close($_SESSION['db']);	
-?>
-	</select>
-	<br>
-	<input type="submit" name="sent" value="Pokracovat">
+						mysql_close($_SESSION['db']);	
+					?>
+				</select>
+			</div>
+			<label for="comp_list" class="control-label input-lg text-right">*</label>
+		</div>
+		<div class="form-group row">
+			<div class="col-lg-2 col-lg-offset-3">
+				<button class="btn btn-success btn-lg" type="submit" name="sent">Pokračovat</button>
+			</div>
+			<div class="col-lg-2">
+			    <span class="pull-right">
+				<a class="btn btn-warning btn-lg" href="concerts.php" role="button">Zpět na koncerty</a>
+				</span>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-lg-4 col-lg-offset-3">
+				<strong>Pro vícenásobný výběr použijte CTRL + Click</strong>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-lg-4 col-lg-offset-3">
+				<strong>Všechny údaje označené * jsou povinné</strong>
+			</div>
+		</div>
+		
+
 </form>
 
-<a href="index.php">Zpet na hlavni stranu</a>
+
+</div>
 </body>
 </html>

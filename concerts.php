@@ -23,6 +23,9 @@ if($_SESSION['role'] != 2){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
+
+
+
 <title>Seznam koncertů</title>
 </head>
 
@@ -72,6 +75,20 @@ if($_SESSION['role'] != 2){
 if(!db_connect())
 	die("Nepodarilo se pripojit k databazi!");
 
+if(isset($_POST['delete'])){
+		$concert_ID = $_POST['CID'];
+		$SQL = "delete from concerts where ID=$concert_ID";
+		mysql_query($SQL, $_SESSION['db']);	
+		
+		$SQL = "delete from concert_composition where concert_ID=$concert_ID";
+		mysql_query($SQL, $_SESSION['db']);
+		
+		$SQL = "delete from concert_musician where concert_ID=$concert_ID";
+		mysql_query($SQL, $_SESSION['db']);
+
+	}
+
+	
 
 if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   $startrow = 0;
@@ -96,22 +113,26 @@ die(mysql_error());
         for($i=0;$i<$num;$i++){
 			$row=mysql_fetch_row($fetch); 
 ?>
-			<form method="post" action="show_concert.php">
-			<tr>				
+			
+			<tr>
+                <form method="post" action="show_concert.php">			
 				<td><input type="hidden" name="Cname" value="<?php echo $row[1]; ?>"></input><?php echo $row[1]; ?></td>
 				<td><input type="hidden" name="Cdate" value="<?php echo $row[2]; ?>"></input><?php echo $row[2]; ?></td>
 				<td><input type="hidden" name="CID" value="<?php echo $row[0]; ?>"></input></td>
-				<td><button class="btn btn-md btn-success" type="submit" name="select"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></td>
+			    <td><button class="btn btn-md btn-primary" type="submit" name="select"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></td>
+				</form>
 			</tr>
-			</form>
-<?PHP       
+		
+<?php       
 		}//for
         echo"</table>";
         }
 ?>	
 
 
-
+<div class="row">
+		&nbsp;
+</div>
 
 <?php
 
@@ -122,7 +143,7 @@ if ($prev >= 0){
 	   <div class=\"form-group row\">
 	   <div class=\"col-lg-2\">
 	   <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".$prev.">".
-      "<button class=\"btn btn-md btn-danger\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></span></span></button>".
+      "<button class=\"btn btn-md btn-success\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></span></span></button>".
 	  "</form></div>";
 }
 else
