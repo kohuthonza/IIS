@@ -13,6 +13,7 @@ if($_SESSION['role'] != 1){
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
 			");
 }
+$_SESSION['musician_added'] = false;
 ?>
 
 
@@ -37,7 +38,7 @@ if($_SESSION['role'] != 1){
 
 	<div class="form-group row">
 		<div class="col-lg-2">
-		    <form action="add_user.php">
+		    <form action="add_musician.php">
 			<button class="btn btn-lg" type="submit">Přidat hudebníka</button>
 			</form>
 		</div>
