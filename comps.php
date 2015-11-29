@@ -13,6 +13,8 @@ if($_SESSION['role'] != 3){
 		<a href=\"index.php\">Zpet na hlavni stranu</a>
 			");
 }
+
+$_SESSION['comp_added'] = false;
 ?>
 
 

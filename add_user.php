@@ -74,6 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			&nbsp;
 		</div>
 		<?php
+		$_SESSION['user_added'] = isset($_POST['name']) ? $_SESSION['user_added'] : false;
 		$_SESSION['user_added'] = isset($_SESSION['user_added']) ? $_SESSION['user_added'] : false;
 		if ($_SESSION['user_added']){
 			
@@ -342,8 +343,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			}
 			else{
 				echo"
-				<div class=\"col-lg-2 col-lg-offset-3\">
+				<div class=\"col-lg-2 col-lg-offset-2\">
+					<span class=\"pull-right\">
 					<a class=\"btn btn-default btn-lg\" href=\"index.php\" role=\"button\">Zpět na hlavní stranu</a>
+					</span>
+				</div>
+				<div class=\"col-lg-2 col-lg-offset-1\">
+					<a class=\"btn btn-default btn-lg\" href=\"add_user.php\" role=\"button\">Přidat dalšího uživatele</a>
 				</div>";
 			}
 			?>
