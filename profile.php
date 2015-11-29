@@ -86,6 +86,12 @@ Váš profil
 			$role = $_SESSION['role'];
 			$login = $_SESSION['login'];
 			$date = $_SESSION['date'];
+			
+			
+	
+			$data_date = explode("-", $date);
+			$data_date[1] = preg_replace('/^0*(.*)/', '$1', $data_date[1]);
+			$data_date[2] = preg_replace('/^0*(.*)/', '$1', $data_date[2]);
 
 			echo 
 			"
@@ -99,7 +105,7 @@ Váš profil
 				</div>
 				<div class=\"row\">
 					<div class=\"col-lg-3 text-right\"><h3><span class=\"pull-right\">Narození:</span><h3></div>
-					<div class=\"col-lg-6 col-lg-offset-1\"><h3>$date<h3></div>
+					<div class=\"col-lg-6 col-lg-offset-1\"><h3>$data_date[2]. $data_date[1]. $data_date[0]<h3></div>
 				</div>
 
 

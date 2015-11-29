@@ -117,7 +117,14 @@ die(mysql_error());
 			<tr>
                 <form method="post" action="show_concert.php">			
 				<td><input type="hidden" name="Cname" value="<?php echo $row[1]; ?>"></input><?php echo $row[1]; ?></td>
-				<td><input type="hidden" name="Cdate" value="<?php echo $row[2]; ?>"></input><?php echo $row[2]; ?></td>
+				<td><input type="hidden" name="Cdate" value="<?php echo $row[2]; ?>"></input>
+				<?php 
+				
+				$data_date = explode("-", $row[2]);
+				
+				
+				echo $data_date[2] . ". " . $data_date[1] . ". " . $data_date[0];  
+				?></td>
 				<td><input type="hidden" name="CID" value="<?php echo $row[0]; ?>"></input></td>
 			    <td><button class="btn btn-md btn-primary" type="submit" name="select"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></td>
 				</form>

@@ -18,114 +18,15 @@ Přidat uživatele
 
 </head>
 
-<body >
-
-<form method="post" action="add_user.php">
-	
-	<div class="container-fluid">
-	<form class="form-horizontal">
-		<div class="form-group row">
-			&nbsp;
-		</div>
-		<div class="form-group row">
-			<label for="first_name" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Jméno</label>
-			<div class="col-lg-4">
-				<input type="text" class="form-control input-lg" id="first_name" placeholder="Jméno" name="name" required>
-			</div>
-			<label for="first_name" class="control-label input-lg text-right">*</label>
-		</div>
-		<div class="form-group row">
-			<label for="second_name" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Příjmení</label>
-			<div class="col-lg-4">
-				<input type="text" class="form-control input-lg" id="second_name" placeholder="Příjmení" name="sname" required>
-			</div>
-			<label for="second_name" class="control-label input-lg text-right">*</label>
-		</div>
-		<div class="form-group row">
-			<label for="birth_date" class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Datum narození</label>
-			<div class="col-lg-1">
-				<select required class="form-control" id="birth_date" name="day">
-					<option value="" disabled selected>DD</option>
-					<?php for ($i = 1; $i <= 31; $i++) : ?>
-						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-					<?php endfor; ?>
-				</select>
-			</div>
-			<div class="col-lg-1">
-				<select required class="form-control" name="month">
-					 <option value="" disabled selected>MM</option>
-					<?php for ($i = 1; $i <= 12; $i++) : ?>
-						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-					<?php endfor; ?>
-				</select>
-			</div>
-			<div class="col-lg-2">
-				<select required class="form-control" name="year">
-				<option value="" disabled selected>RRRR</option>
-					<?php for ($i = 1880; $i <= 2015; $i++) : ?>
-						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-					<?php endfor; ?>
-				</select>
-			</div>
-			<label for="birth_date" class="control-label input-lg text-right">*</label>
-		</div>
-		<div class="form-group row">
-			<label for="tel" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Telefon</label>
-			<div class="col-lg-4">
-				<input type="tel" class="form-control input-lg" id="tel" placeholder="Telefon">
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="role" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Role</label>
-			<div class="col-lg-4">
-				<select required class="form-control input-lg" id="role" name="role">
-					<option value="" disabled selected>Vyberte roli</option>
-					<option value="1">Správce personálu</option>
-					<option value="2">Správce koncertů</option>
-					<option value="3">Správce skladeb</option>	
-				</select>
-			</div>
-			<label for="role" class="control-label input-lg text-right">*</label>
-		</div>
-		<div class="form-group row">
-			<label for="login" class="col-lg-2 col-lg-offset-1 control-label input-lg text-right">Přihlašovací jméno</label>
-			<div class="col-lg-4">
-				<input type="text" class="form-control input-lg" id="login" placeholder="Přihlašovací jméno" name="login" required>
-			</div>
-			<label for="login" class="control-label input-lg text-right">*</label>
-		</div>
-		<div class="form-group row">
-			<label for="passwd" class="col-lg-1 col-lg-offset-2 control-label input-lg text-right">Heslo</label>
-			<div class="col-lg-4">
-				<input type="password" class="form-control input-lg" id="passwd" placeholder="Heslo" name="passwd" required>
-			</div>
-			<label for="passwd" class="control-label input-lg text-right">*</label>
-		</div>
-		<div class="form-group row">
-			<div class="col-lg-2 col-lg-offset-3">
-				<button class="btn btn-success btn-lg" type="submit">Přidat uživatele</button>
-			</div>
-			<div class="col-lg-2">
-				<a class="btn btn-warning btn-lg" href="index.php" role="button">Zpět na hlavní stranu</a>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-lg-4 col-lg-offset-3">
-				<strong>Všechny údaje označené * jsou povinné</strong>
-			</div>
-		</div>
-	</form>
-	</div>
-</body>
-</html>
-
+<body>
 
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+	if (!$_SESSION['user_added']){
 	if(!db_connect())
 		die('Nepodarilo se pripojit k databazi');
-
+    
 	$login = htmlspecialchars($_POST['login']);
 	$pass = htmlspecialchars($_POST['passwd']);
 	$name = htmlspecialchars($_POST['name']) . " " . htmlspecialchars($_POST['sname']); 
@@ -152,18 +53,319 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$cmmnd = "insert into users (Name, Login, Password, Date, Role) values ('$name', '$login', '$pass', '$birth', '$role')";
 			
 	if(mysql_query($cmmnd, $db)){
-		echo "pridano";
+		$_SESSION['user_added'] = true;
 	}
 	else{
 		echo "error: ", mysql_error($db);
 		die();
 	}
-
-	echo "<br>login: ", $login;
-	echo "<br>pass: ", $pass;
-	echo "<br>name: ", $name;
-	echo "<br>date: ", $birth;
-	echo "<br>role: ", $role;
-
 	mysql_close($db);
+    }
+
+	
 }
+?>
+
+<form method="post" action="add_user.php">
+	
+	<div class="container-fluid">
+	<form class="form-horizontal">
+		<div class="form-group row">
+			&nbsp;
+		</div>
+		<?php
+		$_SESSION['user_added'] = isset($_SESSION['user_added']) ? $_SESSION['user_added'] : false;
+		if ($_SESSION['user_added']){
+			
+			echo"<div class=\"form-group row\">
+				<div class=\"col-lg-5 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h1>
+				<strong>Uživatel přidán</strong>
+				</h1>
+				</span>
+				</div>
+				<div class=\"form-group row\">
+				&nbsp;
+				</div>
+				</div>";
+		}
+		?>
+		<div class="form-group row">
+			<?php 
+			if ($_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h4>
+				<strong>Jméno:</strong>
+				</h4>
+				</span>
+				</div>
+				<div class=\"col-lg-4\"><h4><strong>".
+					$_POST['name'] .
+				"</strong></h4></div>";
+					
+			}
+			else{
+				echo"
+				<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
+				<div class=\"col-lg-4\">
+					<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" required>
+				</div>
+				<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
+			}
+			
+			
+			?>
+		</div>
+		<div class="form-group row">
+			<?php 
+			if ($_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h4>
+				<strong>Příjmení:</strong>
+				</h4>
+				</span>
+				</div>
+				<div class=\"col-lg-4\"><h4><strong>".
+					$_POST['sname'] .
+				"</strong></h4></div>";
+					
+			}
+			else{
+				echo"
+				<label for=\"second_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Příjmení</label>
+				<div class=\"col-lg-4\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" required>
+				</div>
+				<label for=\"second_name\" class=\"control-label input-lg text-right\">*</label>";
+			}
+			
+			?>
+		</div>
+		<div class="form-group row">
+		
+			<?php 
+			if ($_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h4>
+				<strong>Datum:</strong>
+				</h4>
+				</span>
+				</div>
+				<div class=\"col-lg-4\"><h4><strong>".
+					$_POST['day'] . ". " . $_POST['month'] . ". " . $_POST['year'] .
+				"</strong></h4></div>";
+					
+			}
+			else{
+				echo"
+				<label for=\"birth_date\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Datum narození</label>
+				
+				<div class=\"col-lg-1\">
+				<select required class=\"form-control\"  name=\"day\">
+					<option value=\"\" disabled selected>DD</option>";
+					for ($i = 1; $i <= 31; $i++) : 
+						echo "<option value=\"" . $i . "\">" . $i . "</option>";
+					endfor;
+				echo"	
+				</select>
+				</div>
+				
+				
+				<div class=\"col-lg-1\">
+				<select required class=\"form-control\" name=\"month\">
+					<option value=\"\" disabled selected>MM</option>";
+					for ($j = 1; $j <= 12; $j++) :
+						echo "<option value=\"" . $j . "\">" . $j . "</option>";
+					endfor;
+				echo"
+				</select>
+				</div>
+				
+				<div class=\"col-lg-2\">
+				<select required class=\"form-control\" name=\"year\">
+				<option value=\"\" disabled selected>RRRR</option>";
+					for ($k = 1880; $k <= 2015; $k++) : 
+						echo "<option value=\"" . $k . "\">" . $k . "</option>";
+					endfor;
+				echo"
+				</select>
+				</div>
+				
+				<label for=\"birth_date\" class=\"control-label input-lg text-right\">*</label>";
+			}
+			
+			?>
+		
+		</div>
+		<div class="form-group row">
+		
+			<?php 
+			if ($_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h4>
+				<strong>Telefon:</strong>
+				</h4>
+				</span>
+				</div>
+				<div class=\"col-lg-4\"><h4><strong>";
+					$_SESSION['tel'] = isset($_POST['user_added']) ? $_SESSION['user_added'] : "";
+					echo $_SESSION['tel'];
+				echo	
+				"</strong></h4></div>";
+					
+			}
+			else{
+				echo"
+				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
+				<div class=\"col-lg-4\">
+				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\">
+				</div>";
+			}
+			
+			?>
+			
+		</div>
+		<div class="form-group row">
+		
+			<?php 
+			if ($_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h4>
+				<strong>Role:</strong>
+				</h4>
+				</span>
+				</div>
+				<div class=\"col-lg-4\"><h4><strong>";
+					switch($_POST['role']){
+						case 1:
+							echo "Správce personálu";
+							break;
+						case 2:
+							echo "Správce koncertů";
+							break;
+						case 3:
+							echo "Správce skladeb";
+							break;
+						default:
+							break;
+							
+					};
+				echo	
+				"</strong></h4></div>";
+					
+			}
+			else{
+				echo"
+				<label for=\"role\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Role</label>
+				<div class=\"col-lg-4\">
+				<select required class=\"form-control input-lg\" id=\"role\" name=\"role\">
+					<option value=\"\" disabled selected>Vyberte roli</option>
+					<option value=\"1\">Správce personálu</option>
+					<option value=\"2\">Správce koncertů</option>
+					<option value=\"3\">Správce skladeb</option>	
+				</select>
+				</div>
+				<label for=\"role\" class=\"control-label input-lg text-right\">*</label>";
+			}
+			
+			?>
+			
+		</div>
+		<div class="form-group row">
+		
+			<?php 
+			if ($_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-1\">
+			    <span class=\"pull-right\">
+				<h4>
+				<strong>Přihlašovací jméno:</strong>
+				</h4>
+				</span>
+				</div>
+				<div class=\"col-lg-4\"><h4><strong>".
+					$_POST['login'] .
+				"</strong></h4></div>";
+					
+			}
+			else{
+				echo"
+				<label for=\"login\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Přihlašovací jméno</label>
+				<div class=\"col-lg-4\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"login\" placeholder=\"Přihlašovací jméno\" name=\"login\" required>
+				</div>
+				<label for=\"login\" class=\"control-label input-lg text-right\">*</label>";
+			}
+			
+			?>
+		
+		</div>
+		<div class="form-group row">
+		
+			<?php 
+			if (!$_SESSION['user_added']){
+				
+				echo"
+				<label for=\"passwd\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Heslo</label>
+				<div class=\"col-lg-4\">
+				<input type=\"password\" class=\"form-control input-lg\" id=\"passwd\" placeholder=\"Heslo\" name=\"passwd\" required>
+				</div>
+				<label for=\"passwd\" class=\"control-label input-lg text-right\">*</label>";
+			}
+			
+			?>
+			
+		</div>
+		<div class="form-group row">
+		
+			<?php 
+			if (!$_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-3\">
+					<button class=\"btn btn-success btn-lg\" type=\"submit\">Přidat uživatele</button>
+				</div>
+				<div class=\"col-lg-2\">
+					<a class=\"btn btn-warning btn-lg\" href=\"index.php\" role=\"button\">Zpět na hlavní stranu</a>
+				</div>";
+					
+			}
+			else{
+				echo"
+				<div class=\"col-lg-2 col-lg-offset-3\">
+					<a class=\"btn btn-default btn-lg\" href=\"index.php\" role=\"button\">Zpět na hlavní stranu</a>
+				</div>";
+			}
+			?>
+		
+			
+		</div>
+		<div class="form-group row">
+			<?php 
+			if (!$_SESSION['user_added']){
+				echo"
+				<div class=\"col-lg-4 col-lg-offset-3\">
+					<strong>Všechny údaje označené * jsou povinné</strong>
+				</div>";
+					
+			}
+			?>
+			
+		</div>
+	</form>
+	</div>
+</body>
+</html>
+
+
+

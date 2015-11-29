@@ -133,7 +133,7 @@ Přidat koncert
 			</div>
 			<div class="col-lg-9">
 			    <h4>
-				<strong><?php echo $_SESSION['name']?></strong>
+				<strong><?php echo $_SESSION['concert_name']?></strong>
 				</h4>
 			</div>
 		</div>
@@ -182,7 +182,12 @@ Přidat koncert
 			    <h4>
 				<?php
 				if(isset($_POST['addC'])){
-					echo "<strong>" . $_SESSION['conct_date'] . "</strong>";
+					
+					$data_date = explode(".", $_SESSION['conct_date']);
+					$data_date[1] = preg_replace('/^0*(.*)/', '$1', $data_date[1]);
+					$data_date[2] = preg_replace('/^0*(.*)/', '$1', $data_date[2]);
+					
+					echo "<strong>" . $data_date[2] . ". " . $data_date[1] . ". " . $data_date[0] . "</strong>";
 				}
 				else{
 					echo "<strong>" . $_POST['day'] . ". " . $_POST['month'] . ". " . $_POST['year'] . "</strong>";

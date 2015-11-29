@@ -24,7 +24,7 @@ if(isset($_POST['sent'])){
 	else{
 	
 		$_SESSION['compositions'] = $_POST['comps'];
-		$_SESSION['name'] = $_POST['Cname'];
+		$_SESSION['concert_name'] = $_POST['Cname'];
 	}
 }
 

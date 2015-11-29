@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION['logged'])){
 	header('Location: profile.php');
 }
-	
+$_SESSION['user_added'] = false;	
 ?>
 
 
