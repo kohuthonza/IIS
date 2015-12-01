@@ -8,8 +8,69 @@ function login($login, $pass){
 	$row = mysql_fetch_array($retval, MYSQL_ASSOC);
 	$pass_DB =  $row['Password'];
 
-	if($pass_DB != $pass)
-		die('Spatne heslo');
+	if($pass_DB != $pass){
+		
+		echo "
+			<html>
+			<html>
+			<head>
+			<meta charset=\"utf-8\">
+			<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
+			<title>
+			Odhlášení
+			</title>
+
+			</head>
+
+			<body>
+			
+			<div class=\"container-fluid\">
+			
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+			
+			<h2><strong><p class=\"text-center\">Špatné heslo, nebo login</p></strong></h2>
+		
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"col-lg-2 col-lg-offset-5\">
+				<span class=\"pull-right\">
+				<a class=\"btn btn-default btn-lg\" href=\"index.php\" role=\"button\">Zpět na hlavní stranu</a>
+				</span>
+			</div>
+			
+			</div>
+			
+			</body>
+			</html>
+			
+			
+			";
+			die();
+		
+		die();
+		}
 
 	$_SESSION['logged'] = true;
 	$_SESSION['login'] = $login;
