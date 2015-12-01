@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
 			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
 			<title>
-			Odhlášení
+			Zadejte heslo
 			</title>
 
 			</head>
@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
 			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
 			<title>
-			Odhlášení
+			Zadejte login
 			</title>
 
 			</head>

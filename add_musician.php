@@ -50,8 +50,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$name = htmlspecialchars($_POST['name']);
 	$sname = htmlspecialchars($_POST['sname']);
-	$rc = htmlspecialchars($_POST['rc']);
-
+	$rc = htmlspecialchars($_POST['rc'] . "/" . $_POST['rc2']);
+	$rc1 = htmlspecialchars($_POST['rc']);
+	$rc2 = htmlspecialchars($_POST['rc2']);
+	
 	$phone = htmlspecialchars($_POST['phone']);
 	$email = htmlspecialchars($_POST['email']);
 	$town = htmlspecialchars($_POST['town']);
@@ -69,8 +71,67 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if(isset($_POST['d']))
 		$d = 'T';	
 			
-	if(strlen($rc) != 11)
-		die("Nespravna delka rodneho cisla!");
+	if((strlen($rc1) != 6 and strlen($rc1) != 5) or strlen($rc2) != 4){
+		echo "
+			<html>
+			<html>
+			<head>
+			<meta charset=\"utf-8\">
+			<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
+			<title>
+			Špatná délka rodného čísla
+			</title>
+
+			</head>
+
+			<body>
+			
+			<div class=\"container-fluid\">
+			
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+			
+			<h3><strong><p class=\"text-center\">Špatná délka rodného čísla</p></strong></h3>
+		
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"col-lg-2 col-lg-offset-5\">
+				<span class=\"pull-right\">
+				<a class=\"btn btn-default btn-lg\" href=\"add_musician.php\" role=\"button\">Zpět na přidání hudebníka</a>
+				</span>
+			</div>
+			
+			</div>
+			
+			</body>
+			</html>
+			
+			
+			";
+			die();
+		
+	}
 	
 	$db = $_SESSION['db'];
 
@@ -190,17 +251,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</span>
 				</div>
 				<div class=\"col-lg-4\"><h4><strong>".
-					$_POST['rc'] .
+					$_POST['rc'] . "/" . $_POST['rc2'] .
 				"</strong></h4></div>";
 					
 			}
 			else{
 				echo"
 				<label for=\"rc\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Rodné číslo</label>
-				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"Rodné číslo\" name=\"rc\" required>
+				<div class=\"col-lg-3\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"Rodné číslo                                   /\" name=\"rc\" required>
 				</div>
-				<label for=\"rc\" class=\"control-label input-lg text-right\">*</label>";
+				<div class=\"col-lg-1\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"\" name=\"rc2\" required>
+				</div>
+				<label for=\"rc2\" class=\"control-label input-lg text-right\">*</label>";
 			}
 			
 			?>

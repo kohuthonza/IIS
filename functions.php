@@ -19,7 +19,7 @@ function login($login, $pass){
 			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
 			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
 			<title>
-			Odhlášení
+			Špatné heslo, nebo login
 			</title>
 
 			</head>
