@@ -84,13 +84,13 @@ $_SESSION['musician_added'] = false;
 	<tr>
 	<td class="col-lg-2"><input class="form-control" type="text" name="Fname" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fname'])){ echo $_POST['Fname'];}?>'> </td>
 	<td class="col-lg-2"><input class="form-control" type="text" name="Fsname" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsname'])){ echo $_POST['Fsname'];}?>'> </td>
-	<td class="col-lg-2"><input class="form-control" type="text" name="Frc" value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Frc'])){ echo $_POST['Frc'];}?>> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Frc" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Frc'])){ echo $_POST['Frc'];}?>'> </td>
 	<td class="col-lg-2"><input class="form-control" type="text" name="Ftown" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftown'])){ echo $_POST['Ftown'];}?>'> </td>
 	<td class="col-lg-2"><input class="form-control" type="text" name="Fphone" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fphone'])){ echo $_POST['Fphone'];}?>'> </td>
-	<td class="col-lg-2"><input class="form-control" type="text" name="Femail" value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Femail'])){ echo $_POST['Femail'];}?>> </td>
-	<td class="col-lg-1"><input class="form-control" type="text" name="Fsm" value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsm'])){ echo $_POST['Fsm'];}?>> </td>
-	<td class="col-lg-1"><input class="form-control" type="text" name="Fd" value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fd'])){ echo $_POST['Fd'];}?>> </td>
-	<td class="col-lg-1"><input class="form-control" type="text" name="Fstr" value=<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fstr'])){ echo $_POST['Fstr'];}?>> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Femail" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Femail'])){ echo $_POST['Femail'];}?>'> </td>
+	<td class="col-lg-1"><input class="form-control" type="text" name="Fsm" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsm'])){ echo $_POST['Fsm'];}?>'> </td>
+	<td class="col-lg-1"><input class="form-control" type="text" name="Fd" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fd'])){ echo $_POST['Fd'];}?>'> </td>
+	<td class="col-lg-1"><input class="form-control" type="text" name="Fstr" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fstr'])){ echo $_POST['Fstr'];}?>'> </td>
 	<td class="col-lg-1"></td>
 	<td class="col-lg-1"></td>
 	<td class="col-lg-1"><button class="btn btn-md" type="submit" name="filter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></td>
@@ -202,11 +202,11 @@ while($row = mysql_fetch_array($retval)){
 	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=rc value=" . $row['RC'] . " </td>";
 	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=town value='" . $row['Town'] . "' </td>";
 	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=phone value='" . $row['Phone'] . "' </td>";
-	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=email value=" . $row['Email'] . " </td>";	
-	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=sm value=" . $row['Sm'] . " </td>";
-	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=d value=" . $row['D'] . " </td>";
-	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=str value=" . $row['Str'] . " </td>";
-	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=hidden name=hidden value=" . $row['RC'] . " </td>";
+	echo "<td class=\"col-lg-2\">" . "<input class=\"form-control\" type=text name=email value='" . $row['Email'] . "' </td>";	
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=sm value='" . $row['Sm'] . "' </td>";
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=d value='" . $row['D'] . "' </td>";
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=text name=str value='" . $row['Str'] . "' </td>";
+	echo "<td class=\"col-lg-1\">" . "<input class=\"form-control\" type=hidden name=hidden value='" . $row['RC'] . "' </td>";
 	echo "<td class=\"col-lg-1\">" . "<button class=\"btn btn-md btn-success\" type=\"submit\" name=\"updatebtn\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></button>" . " </td>";
 	echo "<td class=\"col-lg-1\">" . "<button class=\"btn btn-md btn-danger\" type=\"submit\" name=\"deletebtn\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button>" . " </td>";
 	echo "</tr>";

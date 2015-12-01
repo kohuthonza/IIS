@@ -354,9 +354,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"phone\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"phone\">
 				</div>
-				<label for=\"tel\" class=\"control-label input-lg text-right\">*</label>";
+				";
 			}
 			
 			?>
@@ -383,9 +383,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"email\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">E-mail</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"email\" placeholder=\"E-mail\" name=\"email\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"email\" placeholder=\"E-mail\" name=\"email\">
 				</div>
-				<label for=\"email\" class=\"control-label input-lg text-right\">*</label>";
+				";
 			}
 			
 			?>
@@ -412,9 +412,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"town\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Město (adresa)</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"town\" placeholder=\"Město\" name=\"town\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"town\" placeholder=\"Město\" name=\"town\">
 				</div>
-				<label for=\"email\" class=\"control-label input-lg text-right\">*</label>";
+				";
 			}
 			
 			?>

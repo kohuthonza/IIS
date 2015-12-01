@@ -66,24 +66,29 @@ $_SESSION['comp_added'] = false;
 
 <table class="table table-bordered table-condensed">
 		<tr>	
-		<th>Název</th>
-		<th>Tónina</th>
-		<th>Takt</th>
-		<th>Tempo</th>
-		<th>Umí smyčec</th>
-		<th>Umí dech</th>
-		<th>Umí strunný</th>
-		<th><form method="post" action="comps.php"><button class="btn btn-md" type="submit" name="clear"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></form></td>
+		<th class="col-lg-2">Název</th>
+		<th class="col-lg-1">Tónina</th>
+		<th class="col-lg-1">Takt</th>
+		<th class="col-lg-2">Tempo</th>
+		<th class="col-lg-2">Počet smyčců</th>
+		<th class="col-lg-2">Počet dechů</th>
+		<th class="col-lg-2">Počet strunných</th>
+		<th class="col-lg-1"></th>
+		<th class="col-lg-1"><font color="white">******</font></th>
+		<th><form method="post" action="comps.php"><button class="btn btn-md" type="submit" name="clear"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></form></th>
 		</tr>
+		
 <form method="post" action="comps.php">
 	<tr>
-	<td><input type="text" name="Fname" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fname'])){ echo $_POST['Fname'];}?>'> </td>
-	<td><input type="text" name="Fkey" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fkey'])){ echo $_POST['Fkey'];}?>'> </td>
-	<td><input type="text" name="Ftakt" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftakt'])){ echo $_POST['Ftakt'];}?>'> </td>
-	<td><input type="text" name="Ftempo" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftempo'])){ echo $_POST['Ftempo'];}?>'> </td>
-	<td><input type="text" name="Fsm" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsm'])){ echo $_POST['Fsm'];}?>'> </td>
-	<td><input type="text" name="Fd" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fd'])){ echo $_POST['Fd'];}?>'> </td>
-	<td><input type="text" name="Fstr" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fstr'])){ echo $_POST['Fstr'];}?>'> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Fname" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fname'])){ echo $_POST['Fname'];}?>'> </td>
+	<td class="col-lg-1"><input class="form-control" type="text" name="Fkey" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fkey'])){ echo $_POST['Fkey'];}?>'> </td>
+	<td class="col-lg-1"><input class="form-control" type="text" name="Ftakt" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftakt'])){ echo $_POST['Ftakt'];}?>'> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Ftempo" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftempo'])){ echo $_POST['Ftempo'];}?>'> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Fsm" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsm'])){ echo $_POST['Fsm'];}?>'> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Fd" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fd'])){ echo $_POST['Fd'];}?>'> </td>
+	<td class="col-lg-2"><input class="form-control" type="text" name="Fstr" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fstr'])){ echo $_POST['Fstr'];}?>'> </td>
+	<td class="col-lg-1"></td>
+	<td class="col-lg-1"></td>
 	<td><button class="btn btn-md" type="submit" name="filter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></td>
 </form>
 </table>
