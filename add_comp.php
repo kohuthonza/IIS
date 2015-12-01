@@ -50,9 +50,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$key = htmlspecialchars($_POST['key']);
 	$takt = htmlspecialchars($_POST['takt1'] . "/" . $_POST['takt2']);
 	$tempo = htmlspecialchars($_POST['tempo']);
-	$sm = htmlspecialchars($_POST['sm']);
-	$d = htmlspecialchars($_POST['d']);
-	$str = htmlspecialchars($_POST['str']);
+	$sm = isset($_POST['sm']) ? htmlspecialchars($_POST['sm']) : "0";
+	$d = isset($_POST['d']) ? htmlspecialchars($_POST['d']) : "0";
+	$str = isset($_POST['str']) ? htmlspecialchars($_POST['str']) : "0";
 
 	
 	$_SESSION['takt'] = $takt;
@@ -289,16 +289,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</h4>
 				</span>
 				</div>
-				<div class=\"col-lg-4\"><h4><strong>".
-					$_POST['sm'] .
-				"</strong></h4></div>";
+				<div class=\"col-lg-4\"><h4><strong>";
+				if (isset($_POST['sm'])){
+					echo $_POST['sm'];
+				}
+				else{
+					echo "0";
+				};
+				echo "</strong></h4></div>";
 					
 			}
 			else{
 				echo"
 				<label for=\"sm\" class=\"col-lg-3 control-label input-lg text-right\">Počet smyčcových nástrojů</label>
 				<div class=\"col-lg-4\">
-				<select required class=\"form-control\"  name=\"sm\">
+				<select class=\"form-control\"  name=\"sm\">
 					<option value=\"\" disabled selected>Počet smyčcových nástrojů</option>";
 					for ($i = 1; $i <= 500; $i++) : 
 						echo "<option value=\"" . $i . "\">" . $i . "</option>";
@@ -306,7 +311,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"	
 				</select>
 				</div>
-				<label for=\"sm\" class=\"control-label input-lg text-right\">*</label>";
+				";
 			}
 			
 			
@@ -325,16 +330,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</h4>
 				</span>
 				</div>
-				<div class=\"col-lg-4\"><h4><strong>".
-					$_POST['d'] .
-				"</strong></h4></div>";
+				<div class=\"col-lg-4\"><h4><strong>";
+				if (isset($_POST['d'])){
+					echo $_POST['d'];
+				}
+				else{
+					echo "0";
+				};
+				echo "</strong></h4></div>";
 					
 			}
 			else{
 				echo"
 				<label for=\"d\" class=\"col-lg-3 control-label input-lg text-right\">Počet dechových nástrojů</label>
 				<div class=\"col-lg-4\">
-				<select required class=\"form-control\"  name=\"d\">
+				<select class=\"form-control\"  name=\"d\">
 					<option value=\"\" disabled selected>Počet dechových nástrojů</option>";
 					for ($i = 1; $i <= 500; $i++) : 
 						echo "<option value=\"" . $i . "\">" . $i . "</option>";
@@ -342,7 +352,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				</select>
 				</div>
-				<label for=\"d\" class=\"control-label input-lg text-right\">*</label>";
+				";
 			}
 			
 			
@@ -361,16 +371,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</h4>
 				</span>
 				</div>
-				<div class=\"col-lg-4\"><h4><strong>".
-					$_POST['str'] .
-				"</strong></h4></div>";
+				<div class=\"col-lg-4\"><h4><strong>";
+				if (isset($_POST['str'])){
+					echo $_POST['str'];
+				}
+				else{
+					echo "0";
+				};
+				echo "</strong></h4></div>";
 					
 			}
 			else{
 				echo"
 				<label for=\"str\" class=\"col-lg-3 control-label input-lg text-right\">Počet strunných nástrojů</label>
 				<div class=\"col-lg-4\">
-				<select required class=\"form-control\"  name=\"str\">
+				<select class=\"form-control\"  name=\"str\">
 					<option value=\"\" disabled selected>Počet strunných nástrojů</option>";
 					for ($i = 1; $i <= 500; $i++) : 
 						echo "<option value=\"" . $i . "\">" . $i . "</option>";
@@ -378,7 +393,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"	
 				</select>
 				</div>
-				<label for=\"str\" class=\"control-label input-lg text-right\">*</label>";
+				";
 			}
 			
 			
