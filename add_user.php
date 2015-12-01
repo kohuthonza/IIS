@@ -20,10 +20,49 @@ Přidat uživatele
 
 <body>
 
+<form method="post" action="add_user.php">
+
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-	if (!$_SESSION['user_added']){
+	if(isset($_POST['return'])){
+		$_SESSION['ret'] = true;
+	}
+	else{
+		$_SESSION['ret'] = false;
+	}
+    
+	
+	
+	if (isset($_POST['name'])){
+		$_SESSION['name'] =  $_POST['name'];
+	}
+	if (isset($_POST['sname'])){
+		$_SESSION['sname'] =  $_POST['sname'];
+	}
+	if (isset($_POST['year'])){
+		$_SESSION['year'] =  $_POST['year'];
+	}
+	if (isset($_POST['month'])){
+		$_SESSION['month'] =  $_POST['month'];
+	}
+	if (isset($_POST['day'])){
+		$_SESSION['day'] =  $_POST['day'];
+	}
+	if (isset($_POST['login'])){
+		$_SESSION['login'] =  $_POST['login'];
+	}
+	if (isset($_POST['role'])){
+		$_SESSION['role'] =  $_POST['role'];
+	}
+	if (isset($_POST['tel'])){
+		$_SESSION['phone'] =  $_POST['tel'];
+	}
+	
+	
+	
+	
+	if (!$_SESSION['user_added'] and !$_SESSION['ret']){
 	if(!db_connect())
 		die('Nepodarilo se pripojit k databazi');
     
@@ -58,20 +97,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	else{
 		if (mysql_errno($db) == 1062) {
 			echo "
-			<html>
-			<html>
-			<head>
-			<meta charset=\"utf-8\">
-			<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
-			<title>
-			Uživatel již existuje
-			</title>
-
-			</head>
-
-			<body>
 			
 			<div class=\"container-fluid\">
 			
@@ -103,18 +128,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</div>
 			<div class=\"col-lg-2 col-lg-offset-5\">
 				<span class=\"pull-right\">
-				<a class=\"btn btn-default btn-lg\" href=\"add_user.php\" role=\"button\">Zpět na přidání uživatele</a>
+				<button class=\"btn btn btn-lg\" name=\"return\" type=\"submit\" value=\"true\">Zpět na přidání uživatele</button>
 				</span>
 			</div>
 			
 			</div>
 			
-			</body>
-			</html>
 			
 			
 			";
-			die();
+			$_SESSION['filled'] = true;
 		}
 		else{
 			echo "error: ", mysql_error($db);
@@ -128,7 +151,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 ?>
 
-<form method="post" action="add_user.php">
+
 	
 	<div class="container-fluid">
 	<form class="form-horizontal">
@@ -138,6 +161,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<?php
 		$_SESSION['user_added'] = isset($_POST['name']) ? $_SESSION['user_added'] : false;
 		$_SESSION['user_added'] = isset($_SESSION['user_added']) ? $_SESSION['user_added'] : false;
+		$_SESSION['filled'] = isset($_SESSION['filled']) ? $_SESSION['filled'] : false;
+		$_SESSION['ret'] = isset($_SESSION['ret']) ? $_SESSION['ret'] : false;
+		
+		if ($_SESSION['ret']){
+			$_SESSION['filled'] = false;
+		}
+		
+		if(!$_SESSION['filled']){
 		if ($_SESSION['user_added']){
 			
 			echo"<div class=\"form-group row\">
@@ -153,9 +184,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</div>
 				</div>";
 		}
+		}
 		?>
 		<div class="form-group row">
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -174,16 +207,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
 				<div class=\"col-lg-4\">
-					<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" required>
+					<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\""; if(isset($_SESSION['name'])){ echo $_SESSION['name'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
+				unset($_SESSION['name']);
 			}
-			
+			}
 			
 			?>
 		</div>
 		<div class="form-group row">
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -202,22 +237,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"second_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Příjmení</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\""; if(isset($_SESSION['sname'])){ echo $_SESSION['sname'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"second_name\" class=\"control-label input-lg text-right\">*</label>";
+				unset($_SESSION['sname']);
 			}
-			
+			}
 			?>
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
 			    <span class=\"pull-right\">
 				<h4>
-				<strong>Datum:</strong>
+				<strong>Datum narození:</strong>
 				</h4>
 				</span>
 				</div>
@@ -234,8 +271,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<select required class=\"form-control\"  name=\"day\">
 					<option value=\"\" disabled selected>DD</option>";
 					for ($i = 1; $i <= 31; $i++) : 
-						echo "<option value=\"" . $i . "\">" . $i . "</option>";
+						if (isset($_SESSION['day'])){
+							if ($i == $_SESSION['day']){
+								echo "<option value=\"" . $i . "\"selected>" . $i . "</option>";
+							}
+							else{
+								echo "<option value=\"" . $i . "\">" . $i . "</option>";
+							}
+						}
+						else{
+							echo "<option value=\"" . $i . "\">" . $i . "</option>";
+						}
 					endfor;
+					unset($_SESSION['day']);
 				echo"	
 				</select>
 				</div>
@@ -245,8 +293,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<select required class=\"form-control\" name=\"month\">
 					<option value=\"\" disabled selected>MM</option>";
 					for ($j = 1; $j <= 12; $j++) :
-						echo "<option value=\"" . $j . "\">" . $j . "</option>";
+						if (isset($_SESSION['month'])){
+							if ($j == $_SESSION['month']){
+								echo "<option value=\"" . $j . "\"selected>" . $j . "</option>";
+							}
+							else{
+								echo "<option value=\"" . $j . "\">" . $j . "</option>";
+							}
+						}
+						else{
+							echo "<option value=\"" . $j . "\">" . $j . "</option>";
+						}
 					endfor;
+					unset($_SESSION['month']);
 				echo"
 				</select>
 				</div>
@@ -255,21 +314,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<select required class=\"form-control\" name=\"year\">
 				<option value=\"\" disabled selected>RRRR</option>";
 					for ($k = 1880; $k <= 2015; $k++) : 
-						echo "<option value=\"" . $k . "\">" . $k . "</option>";
+						if (isset($_SESSION['year'])){
+							if ($k == $_SESSION['year']){
+								echo "<option value=\"" . $k . "\"selected>" . $k . "</option>";
+							}
+							else{
+								echo "<option value=\"" . $k . "\">" . $k . "</option>";
+							}
+						}
+						else{
+							echo "<option value=\"" . $k . "\">" . $k . "</option>";
+						}
 					endfor;
+					unset($_SESSION['year']);
 				echo"
 				</select>
 				</div>
 				
 				<label for=\"birth_date\" class=\"control-label input-lg text-right\">*</label>";
 			}
-			
+			}
 			?>
 		
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -290,16 +361,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
 				<div class=\"col-lg-4\">
-				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\">
+				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\" value=\"";if(isset($_SESSION['phone'])){ echo $_SESSION['phone'];} else{ echo "";}; echo "\">
 				</div>";
 			}
-			
+			}
 			?>
 			
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -333,21 +405,48 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<label for=\"role\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Role</label>
 				<div class=\"col-lg-4\">
 				<select required class=\"form-control input-lg\" id=\"role\" name=\"role\">
-					<option value=\"\" disabled selected>Vyberte roli</option>
-					<option value=\"1\">Správce personálu</option>
-					<option value=\"2\">Správce koncertů</option>
-					<option value=\"3\">Správce skladeb</option>	
+					<option value=\"\" disabled selected>Vyberte roli</option>";
+					if (isset($_SESSION['role'])){
+						switch($_SESSION['role']){
+							case 1:
+								echo"
+								<option value=\"1\" selected>Správce personálu</option>
+								<option value=\"2\">Správce koncertů</option>
+								<option value=\"3\">Správce skladeb</option>";	
+								break;
+							case 2:
+								echo"
+								<option value=\"1\">Správce personálu</option>
+								<option value=\"2\" selected>Správce koncertů</option>
+								<option value=\"3\">Správce skladeb</option>";	
+								break;
+							case 3:
+								echo"
+								<option value=\"1\">Správce personálu</option>
+								<option value=\"2\">Správce koncertů</option>
+								<option value=\"3\" selected>Správce skladeb</option>";	
+								break;
+						}
+					}
+					else{
+						echo"
+						<option value=\"1\">Správce personálu</option>
+						<option value=\"2\">Správce koncertů</option>
+						<option value=\"3\">Správce skladeb</option>";	
+					}
+				echo"	
 				</select>
 				</div>
 				<label for=\"role\" class=\"control-label input-lg text-right\">*</label>";
 			}
-			
+			}
 			?>
 			
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -366,17 +465,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"login\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Přihlašovací jméno</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"login\" placeholder=\"Přihlašovací jméno\" name=\"login\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"login\" placeholder=\"Přihlašovací jméno\" name=\"login\" value=\"";if(isset($_SESSION['login'])){ echo $_SESSION['login'];} else{ echo "";}; echo "\"required>
 				</div>
 				<label for=\"login\" class=\"control-label input-lg text-right\">*</label>";
 			}
-			
+			}
 			?>
 		
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if (!$_SESSION['user_added']){
 				
 				echo"
@@ -386,13 +486,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</div>
 				<label for=\"passwd\" class=\"control-label input-lg text-right\">*</label>";
 			}
-			
+			}
 			?>
 			
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if (!$_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-3\">
@@ -414,18 +515,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					<a class=\"btn btn-default btn-lg\" href=\"add_user.php\" role=\"button\">Přidat dalšího uživatele</a>
 				</div>";
 			}
+			}
 			?>
 		
 			
 		</div>
 		<div class="form-group row">
 			<?php 
+			if(!$_SESSION['filled']){
 			if (!$_SESSION['user_added']){
 				echo"
 				<div class=\"col-lg-4 col-lg-offset-3\">
 					<strong>Všechny údaje označené * jsou povinné</strong>
 				</div>";
 					
+			}
 			}
 			?>
 			
