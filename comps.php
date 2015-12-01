@@ -68,12 +68,22 @@ $_SESSION['comp_added'] = false;
 		<tr>	
 		<th>Název</th>
 		<th>Tónina</th>
+		<th>Takt</th>
+		<th>Tempo</th>
+		<th>Umí smyčec</th>
+		<th>Umí dech</th>
+		<th>Umí strunný</th>
 		<th><form method="post" action="comps.php"><button class="btn btn-md" type="submit" name="clear"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></form></td>
 		</tr>
 <form method="post" action="comps.php">
 	<tr>
 	<td><input type="text" name="Fname" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fname'])){ echo $_POST['Fname'];}?>'> </td>
 	<td><input type="text" name="Fkey" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fkey'])){ echo $_POST['Fkey'];}?>'> </td>
+	<td><input type="text" name="Ftakt" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftakt'])){ echo $_POST['Ftakt'];}?>'> </td>
+	<td><input type="text" name="Ftempo" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Ftempo'])){ echo $_POST['Ftempo'];}?>'> </td>
+	<td><input type="text" name="Fsm" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fsm'])){ echo $_POST['Fsm'];}?>'> </td>
+	<td><input type="text" name="Fd" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fd'])){ echo $_POST['Fd'];}?>'> </td>
+	<td><input type="text" name="Fstr" value='<?php if(isset($_POST['filter']) and !isset($_POST['clear']) and !empty($_POST['Fstr'])){ echo $_POST['Fstr'];}?>'> </td>
 	<td><button class="btn btn-md" type="submit" name="filter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></td>
 </form>
 </table>
@@ -101,6 +111,9 @@ if(isset($_POST['updatebtn'])){
 if(isset($_POST['deletebtn'])){
 	$deleteQry = "delete from compositions where ID='$_POST[hidden]'";
 	mysql_query($deleteQry, $_SESSION['db']);
+	
+	$deleteQry = "delete from concert_composition where ID='$_POST[hidden]'";
+	mysql_query($deleteQry, $_SESSION['db']);
 };
 
 $SQL = "select * from compositions";
@@ -113,6 +126,26 @@ if(isset($_POST['filter'])){
 	}
 	if(!empty($_POST['Fkey'])){
 		$SQL = $SQL . " $where Comp_Key='$_POST[Fkey]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Ftakt'])){
+		$SQL = $SQL . " $where Takt='$_POST[Ftakt]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Ftempo'])){
+		$SQL = $SQL . " $where Tempo='$_POST[Ftempo]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Fsm'])){
+		$SQL = $SQL . " $where Sm='$_POST[Fsm]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Fd'])){
+		$SQL = $SQL . " $where D='$_POST[Fd]'";
+		$where = " and";
+	}
+	if(!empty($_POST['Fstr'])){
+		$SQL = $SQL . " $where Str='$_POST[Fstr]'";
 		$where = " and";
 	}
 	

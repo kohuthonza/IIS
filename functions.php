@@ -39,6 +39,9 @@ function db_connect(){
 		echo('databeze nedostupna');
 		return false;
 	}
+	
+	mysql_set_charset("utf8");
+
 
 	$_SESSION['connected'] = true;
 	$_SESSION['db'] = $db;

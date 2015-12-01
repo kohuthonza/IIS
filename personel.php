@@ -129,6 +129,9 @@ if(isset($_POST['updatebtn'])){
 if(isset($_POST['deletebtn'])){
 	$deleteQry = "delete from musicians where RC='$_POST[hidden]'";
 	mysql_query($deleteQry, $_SESSION['db']);
+	
+	$deleteQry = "delete from concert_musician where RC='$_POST[hidden]'";
+	mysql_query($deleteQry, $_SESSION['db']);
 };
 
 $SQL = "select * from musicians";
