@@ -136,13 +136,76 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$db = $_SESSION['db'];
 
 	$cmmnd = "insert into musicians (Name, SName, RC, Phone, Email, Town, Sm, D, Str) values ('$name', '$sname', '$rc', '$phone', '$email', '$town', '$sm', '$d', '$str')";
-			
+	
 	if(mysql_query($cmmnd, $db)){
 		$_SESSION['musician_added'] = true;
 	}
 	else{
-		echo "error: ", mysql_error($db);
-		die();
+		if (mysql_errno($db) == 1062) {
+			echo "
+			<html>
+			<html>
+			<head>
+			<meta charset=\"utf-8\">
+			<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
+			<title>
+			Hudebník již existuje
+			</title>
+
+			</head>
+
+			<body>
+			
+			<div class=\"container-fluid\">
+			
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+			
+			<h3><strong><p class=\"text-center\">Hudebník s tímto rodným číslem <br> již existuje</p></strong></h3>
+		
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"form-group row\">
+				&nbsp;
+			</div>
+			<div class=\"col-lg-2 col-lg-offset-5\">
+				<span class=\"pull-right\">
+				<a class=\"btn btn-default btn-lg\" href=\"add_musician.php\" role=\"button\">Zpět na přidání hudebníka</a>
+				</span>
+			</div>
+			
+			</div>
+			
+			</body>
+			</html>
+			
+			
+			";
+			die();
+		}
+		else{
+			echo "error: ", mysql_error($db);
+			die();
+		}
+		
 	}
 
 	mysql_close($db);
