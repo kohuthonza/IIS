@@ -78,6 +78,10 @@ function login($login, $pass){
 	$_SESSION['name'] = $row['Name'];
 	$_SESSION['date'] = $row['Date'];
 	
+	$_SESSION['timestamp'] = time();
+	
+	$_SESSION['timeout'] = 300;
+	
 	/*if(!db_connect()){
 		die("<br>Nepovedlo se pripojit k DB!<br>");
 	}*/
@@ -109,6 +113,67 @@ function db_connect(){
 
 	return true;
 
+}
+
+function logout_msg(){
+	echo "
+		<html>
+		<html>
+		<head>
+		<meta charset=\"utf-8\">
+		<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+		<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
+		<title>
+		Odhlášení
+		</title>
+
+		</head>
+
+		<body>
+		
+		<div class=\"container-fluid\">
+		
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"form-group row\">
+		
+		<h2><strong><p class=\"text-center\">Byl jste automaticky odhlášen.<br>Přihlašte se prosím znovu.</p></strong></h2>
+	
+		</div>
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"form-group row\">
+			&nbsp;
+		</div>
+		<div class=\"col-lg-2 col-lg-offset-5\">
+			<span class=\"pull-right\">
+			<a class=\"btn btn-default btn-lg\" href=\"index.php\" role=\"button\">Zpět na hlavní stranu</a>
+			</span>
+		</div>
+		
+		</div>
+		
+		</body>
+		</html>
+		
+		
+		";
+	
 }
 
 ?>

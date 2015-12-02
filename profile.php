@@ -2,6 +2,19 @@
 header("Content-Type: text/html; charset=UTF-8");
 session_save_path("./tmp");
 session_start();
+include_once('functions.php');
+if(!isset($_SESSION['logged'])){
+	header('Location: index.php');
+}
+if(time() - $_SESSION['timestamp'] > $_SESSION['timeout']) { //subtract new timestamp from the old one
+	unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
+	unset($_SESSION['logged']);
+	logout_msg();
+	//header('Location: index.php'); //redirect to index.php
+	exit;
+} else {
+	$_SESSION['timestamp'] = time(); //set new timestamp
+}
 ?>
 
 <html>
