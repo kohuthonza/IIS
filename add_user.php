@@ -189,29 +189,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<div class="form-group row">
 			<?php 
 			if(!$_SESSION['filled']){
-			if ($_SESSION['user_added']){
-				echo"
-				<div class=\"col-lg-2 col-lg-offset-1\">
-			    <span class=\"pull-right\">
-				<h4>
-				<strong>Jméno:</strong>
-				</h4>
-				</span>
-				</div>
-				<div class=\"col-lg-4\"><h4><strong>".
-					$_POST['name'] .
-				"</strong></h4></div>";
-					
-			}
-			else{
-				echo"
-				<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
-				<div class=\"col-lg-4\">
-					<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\""; if(isset($_SESSION['fl_name'])){ echo $_SESSION['fl_name'];} else{ echo "";}; echo "\" required>
-				</div>
-				<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
-				unset($_SESSION['fl_name']);
-			}
+				if ($_SESSION['user_added']){
+					echo"
+					<div class=\"col-lg-2 col-lg-offset-1\">
+					<span class=\"pull-right\">
+					<h4>
+					<strong>Jméno:</strong>
+					</h4>
+					</span>
+					</div>
+					<div class=\"col-lg-4\"><h4><strong>".
+						$_POST['name'] .
+					"</strong></h4></div>";
+						
+				}
+				else{
+					echo"
+					<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
+					<div class=\"col-lg-4\">
+						<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\""; 
+						if(isset($_SESSION['fl_name'])){ echo $_SESSION['fl_name'];} else{ echo "";}; 
+						echo "\" required>
+					</div>
+					<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
+					unset($_SESSION['fl_name']);
+				}
 			}
 			
 			?>
@@ -237,7 +239,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"second_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Příjmení</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\""; if(isset($_SESSION['fl_sname'])){ echo $_SESSION['fl_sname'];} else{ echo "";}; echo "\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\"";
+				if(isset($_SESSION['fl_sname'])){ echo $_SESSION['fl_sname'];} else{ echo "";}; 
+				echo "\" required>
 				</div>
 				<label for=\"second_name\" class=\"control-label input-lg text-right\">*</label>";
 				unset($_SESSION['fl_sname']);
@@ -361,7 +365,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
 				<div class=\"col-lg-4\">
-				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\" value=\"";if(isset($_SESSION['fl_phone'])){ echo $_SESSION['fl_phone'];} else{ echo "";}; echo "\">
+				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\" value=\"";
+				if(isset($_SESSION['fl_phone'])){ echo $_SESSION['fl_phone'];} else{ echo "";};
+				echo "\">
 				</div>";
 				unset($_SESSION['fl_phone']);
 			}
@@ -466,7 +472,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"login\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Přihlašovací jméno</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"login\" placeholder=\"Přihlašovací jméno\" name=\"login\" value=\"";if(isset($_SESSION['login'])){ echo $_SESSION['login'];} else{ echo "";}; echo "\"required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"login\" placeholder=\"Přihlašovací jméno\" name=\"login\" value=\"";
+				if(isset($_SESSION['login'])){ echo $_SESSION['login'];} else{ echo "";}; 
+				echo "\"required>
 				</div>
 				<label for=\"login\" class=\"control-label input-lg text-right\">*</label>";
 			}

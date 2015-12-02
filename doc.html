@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Název zadání</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Martin Knotek <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xknote11@stud.fit.vutbr.cz">xknote11@stud.fit.vutbr.cz</a> -
+		databázový subsystém
+	</dd>
+	<dd>Jan Kohút <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xkohut08@stud.fit.vutbr.cz">xkohut08@stud.fit.vutbr.cz</a> - 
+		uživatelské rozhraní
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xknote11/index.php">http://www.stud.fit.vutbr.cz/~xknote11/index.php</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>sprper</td><td>sprper</td><td>Správce personálu</td></tr>
+<tr><td>sprkon</td><td>sprkon</td><td>Správce koncertů</td></tr>
+<tr><td>sprskl</td><td>sprskl</td><td>Správce skladeb</td></tr>
+</table>
+
+<h2>Implementace</h2>
+<p><h4>Implementace správce personálu</h4>
+   Skript add_personel.php implementuje přidávání hudebníků.
+   Skript personel.php implementuje přehled hudebníků, jejich editaci a odstranění.
+   <br>
+   <br>
+   <h4>Implementace správce koncertů</h4>
+   Skript add_concert.php, add_concert1.php a add_concert2.php implementuje přidávání koncertů.
+   Skript show_concert.php implementuje editaci a odstranění koncertů.   
+   Skript concerts.php implementuje přehled koncertů.
+   <br>
+   <br>
+   <h4>Implementace správce skladeb</h4>
+   Skript add_comp.php implementuje přidávání skladeb.
+   Skript comps.php implementuje přehled skladeb, jejich editaci a odstranění.
+   <br>
+   <br>
+   <h4>Implementace přidávání správců</h4>
+   Skript add_user.php
+   <br>
+   <br>
+   <h4>Implementace zobrazení profilu uživatele</h4>
+   Skript profile.php
+   
+   
+
+</p>
+
+<h2>Instalace</h2>
+<ul>
+<li>Stručně popište postup instalace na server</li>
+<li>Softwarové požadavky (verze PHP apod.)</li>
+<li>Jak rozbalit, konfigurovat, inicializovat databází, ...</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Z časových důvodů nebyla implementována role správce skladu (nástrojů)</p>
+
+</body>
+</html>

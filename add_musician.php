@@ -309,7 +309,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\"";if(isset($_SESSION['fl_name'])){ echo $_SESSION['fl_name'];} else{ echo "";}; echo "\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\"";
+				if(isset($_SESSION['fl_name'])){ echo $_SESSION['fl_name'];} else{ echo "";}; 
+				echo "\" required>
 				</div>
 				<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
 				unset($_SESSION['fl_name']);
@@ -340,7 +342,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"second_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Příjmení</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\"";if(isset($_SESSION['fl_sname'])){ echo $_SESSION['fl_sname'];} else{ echo "";}; echo "\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\"";
+				if(isset($_SESSION['fl_sname'])){ echo $_SESSION['fl_sname'];} else{ echo "";}; 
+				echo "\" required>
 				</div>
 				<label for=\"second_name\" class=\"control-label input-lg text-right\">*</label>";
 				unset($_SESSION['fl_sname']);
@@ -375,7 +379,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"Rodné číslo                                   /\" name=\"rc\" value=\"";if(isset($_SESSION['fl_rc'])){ echo $_SESSION['fl_rc'];} else{ echo "";}; echo "\" required>
 				</div>
 				<div class=\"col-lg-1\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"\" name=\"rc2\" value=\"";if(isset($_SESSION['fl_rc2'])){ echo $_SESSION['fl_rc2'];} else{ echo "";}; echo "\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"\" name=\"rc2\" value=\"";
+				if(isset($_SESSION['fl_rc2'])){ echo $_SESSION['fl_rc2'];} else{ echo "";}; 
+				echo "\" required>
 				</div>
 				<label for=\"rc2\" class=\"control-label input-lg text-right\">*</label>";
 				unset($_SESSION['fl_rc']);
@@ -407,7 +413,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"phone\" value=\"";if(isset($_SESSION['fl_phone'])){ echo $_SESSION['fl_phone'];} else{ echo "";}; echo "\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"phone\" value=\"";
+				if(isset($_SESSION['fl_phone'])){ echo $_SESSION['fl_phone'];} else{ echo "";};
+				echo "\">
 				</div>
 				";
 				unset($_SESSION['fl_phone']);
@@ -438,7 +446,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"email\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">E-mail</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"email\" placeholder=\"E-mail\" name=\"email\" value=\"";if(isset($_SESSION['fl_email'])){ echo $_SESSION['fl_email'];} else{ echo "";}; echo "\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"email\" placeholder=\"E-mail\" name=\"email\" value=\"";
+				if(isset($_SESSION['fl_email'])){ echo $_SESSION['fl_email'];} else{ echo "";}; 
+				echo "\">
 				</div>
 				";
 				unset($_SESSION['fl_email']);
@@ -469,7 +479,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"town\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Město (adresa)</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"town\" placeholder=\"Město\" name=\"town\" value=\"";if(isset($_SESSION['fl_town'])){ echo $_SESSION['fl_town'];} else{ echo "";}; echo "\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"town\" placeholder=\"Město\" name=\"town\" value=\"";
+				if(isset($_SESSION['fl_town'])){ echo $_SESSION['fl_town'];} else{ echo "";};
+				echo "\">
 				</div>
 				";
 				unset($_SESSION['fl_town']);
@@ -516,9 +528,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<label class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Hraje na nástroje</label>
 				<div class=\"col-lg-4\">
 				<div class=\"checkbox\">		
-					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"sm\" value=\"\""; if(isset($_SESSION['fl_sm'])){ echo " checked";} else{ echo "";}; echo ">Smyčcové</label>
-					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"d\" value=\"\""; if(isset($_SESSION['fl_d'])){ echo " checked";} else{ echo "";}; echo ">Dechové</label>
-					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"str\" value=\"\""; if(isset($_SESSION['fl_str'])){ echo " checked";} else{ echo "";}; echo ">Strunné</label>
+					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"sm\" value=\"\""; 
+					if(isset($_SESSION['fl_sm'])){ echo " checked";} else{ echo "";}; 
+					echo ">Smyčcové</label>
+					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"d\" value=\"\""; 
+					if(isset($_SESSION['fl_d'])){ echo " checked";} else{ echo "";}; 
+					echo ">Dechové</label>
+					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"str\" value=\"\""; 
+					if(isset($_SESSION['fl_str'])){ echo " checked";} else{ echo "";}; 
+					echo ">Strunné</label>
 				</div>
 				</div>
 				</div>

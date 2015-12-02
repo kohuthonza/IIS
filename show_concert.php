@@ -190,7 +190,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$SQL = "delete from concert_musician where music_RC=$_POST[deleteMID] and concert_ID=$concert_ID";
 		//echo $SQL;
 		mysql_query($SQL, $_SESSION['db']);
-		echo "Hudebnik odstranen!<br>";
 		//header('Location: show_concert.php');
 	}
 	
