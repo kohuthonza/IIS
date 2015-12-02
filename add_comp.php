@@ -24,7 +24,7 @@ if($_SESSION['role'] != 3){
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_comps_background.png);
+body {background-image:url(./profile_comps_background.png);
 	  background-repeat: no-repeat;
 	  background-position: 125% -58px;}
 </style>

@@ -35,28 +35,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 	
 	if (isset($_POST['name'])){
-		$_SESSION['name'] =  $_POST['name'];
+		$_SESSION['fl_name'] =  $_POST['name'];
 	}
 	if (isset($_POST['sname'])){
-		$_SESSION['sname'] =  $_POST['sname'];
+		$_SESSION['fl_sname'] =  $_POST['sname'];
 	}
 	if (isset($_POST['year'])){
-		$_SESSION['year'] =  $_POST['year'];
+		$_SESSION['fl_year'] =  $_POST['year'];
 	}
 	if (isset($_POST['month'])){
-		$_SESSION['month'] =  $_POST['month'];
+		$_SESSION['fl_month'] =  $_POST['month'];
 	}
 	if (isset($_POST['day'])){
-		$_SESSION['day'] =  $_POST['day'];
+		$_SESSION['fl_day'] =  $_POST['day'];
 	}
 	if (isset($_POST['login'])){
-		$_SESSION['login'] =  $_POST['login'];
+		$_SESSION['fl_login'] =  $_POST['login'];
 	}
 	if (isset($_POST['role'])){
-		$_SESSION['role'] =  $_POST['role'];
+		$_SESSION['fl_role'] =  $_POST['role'];
 	}
 	if (isset($_POST['tel'])){
-		$_SESSION['phone'] =  $_POST['tel'];
+		$_SESSION['fl_phone'] =  $_POST['tel'];
 	}
 	
 	
@@ -207,10 +207,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
 				<div class=\"col-lg-4\">
-					<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\""; if(isset($_SESSION['name'])){ echo $_SESSION['name'];} else{ echo "";}; echo "\" required>
+					<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\""; if(isset($_SESSION['fl_name'])){ echo $_SESSION['fl_name'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
-				unset($_SESSION['name']);
+				unset($_SESSION['fl_name']);
 			}
 			}
 			
@@ -237,10 +237,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"second_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Příjmení</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\""; if(isset($_SESSION['sname'])){ echo $_SESSION['sname'];} else{ echo "";}; echo "\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\""; if(isset($_SESSION['fl_sname'])){ echo $_SESSION['fl_sname'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"second_name\" class=\"control-label input-lg text-right\">*</label>";
-				unset($_SESSION['sname']);
+				unset($_SESSION['fl_sname']);
 			}
 			}
 			?>
@@ -271,8 +271,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<select required class=\"form-control\"  name=\"day\">
 					<option value=\"\" disabled selected>DD</option>";
 					for ($i = 1; $i <= 31; $i++) : 
-						if (isset($_SESSION['day'])){
-							if ($i == $_SESSION['day']){
+						if (isset($_SESSION['fl_day'])){
+							if ($i == $_SESSION['fl_day']){
 								echo "<option value=\"" . $i . "\"selected>" . $i . "</option>";
 							}
 							else{
@@ -283,7 +283,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 							echo "<option value=\"" . $i . "\">" . $i . "</option>";
 						}
 					endfor;
-					unset($_SESSION['day']);
+					unset($_SESSION['fl_day']);
 				echo"	
 				</select>
 				</div>
@@ -293,8 +293,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<select required class=\"form-control\" name=\"month\">
 					<option value=\"\" disabled selected>MM</option>";
 					for ($j = 1; $j <= 12; $j++) :
-						if (isset($_SESSION['month'])){
-							if ($j == $_SESSION['month']){
+						if (isset($_SESSION['fl_month'])){
+							if ($j == $_SESSION['fl_month']){
 								echo "<option value=\"" . $j . "\"selected>" . $j . "</option>";
 							}
 							else{
@@ -305,7 +305,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 							echo "<option value=\"" . $j . "\">" . $j . "</option>";
 						}
 					endfor;
-					unset($_SESSION['month']);
+					unset($_SESSION['fl_month']);
 				echo"
 				</select>
 				</div>
@@ -314,8 +314,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<select required class=\"form-control\" name=\"year\">
 				<option value=\"\" disabled selected>RRRR</option>";
 					for ($k = 1880; $k <= 2015; $k++) : 
-						if (isset($_SESSION['year'])){
-							if ($k == $_SESSION['year']){
+						if (isset($_SESSION['fl_year'])){
+							if ($k == $_SESSION['fl_year']){
 								echo "<option value=\"" . $k . "\"selected>" . $k . "</option>";
 							}
 							else{
@@ -326,7 +326,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 							echo "<option value=\"" . $k . "\">" . $k . "</option>";
 						}
 					endfor;
-					unset($_SESSION['year']);
+					unset($_SESSION['fl_year']);
 				echo"
 				</select>
 				</div>
@@ -361,8 +361,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
 				<div class=\"col-lg-4\">
-				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\" value=\"";if(isset($_SESSION['phone'])){ echo $_SESSION['phone'];} else{ echo "";}; echo "\">
+				<input type=\"tel\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"tel\" value=\"";if(isset($_SESSION['fl_phone'])){ echo $_SESSION['fl_phone'];} else{ echo "";}; echo "\">
 				</div>";
+				unset($_SESSION['fl_phone']);
 			}
 			}
 			?>
@@ -406,8 +407,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<div class=\"col-lg-4\">
 				<select required class=\"form-control input-lg\" id=\"role\" name=\"role\">
 					<option value=\"\" disabled selected>Vyberte roli</option>";
-					if (isset($_SESSION['role'])){
-						switch($_SESSION['role']){
+					if (isset($_SESSION['fl_role'])){
+						switch($_SESSION['fl_role']){
 							case 1:
 								echo"
 								<option value=\"1\" selected>Správce personálu</option>

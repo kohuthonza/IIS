@@ -24,7 +24,7 @@ switch($role){
 	//Spravce hudebniku
 	case 1:
 		echo "<style>
-    		  	body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_personel_background.jpg);
+    		  	body {background-image:url(./profile_personel_background.jpg);
 				      background-repeat: no-repeat;
 					  background-position: 117% 10px;}
 			  </style>";		
@@ -32,7 +32,7 @@ switch($role){
 	//Spravce koncertu
 	case 2:
 		echo "<style>
-				body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_concerts_background.png);
+				body {background-image:url(./profile_concerts_background.png);
 					  background-repeat: no-repeat;
 					  background-position: 90% 37px;}
 			  </style>";
@@ -40,7 +40,7 @@ switch($role){
 	//Spravce skladeb
 	case 3:
 		echo "<style>
-    		  	body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_comps_background.png);
+    		  	body {background-image:url(./profile_comps_background.png);
 					  background-repeat: no-repeat;
 					  background-position: 117% -58px;}
 			  </style>";

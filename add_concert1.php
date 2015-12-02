@@ -39,7 +39,7 @@ if(isset($_POST['sent'])){
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-	body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_concerts_background.png);
+	body {background-image:url(./profile_concerts_background.png);
 		  background-repeat: no-repeat;
 		  background-position: 90% 37px;}
 </style>

@@ -24,7 +24,7 @@ if($_SESSION['role'] != 1){
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-body {background-image:url(http://www.stud.fit.vutbr.cz/~xkohut08/profile_personel_background.jpg);
+body {background-image:url(./profile_personel_background.jpg);
 	  background-repeat: no-repeat;
 	  background-position: 117% 10px;}
 </style>
@@ -38,13 +38,54 @@ Přidat hudebníka
 </head>
 
 <body>
-
+<form method="post" action="add_musician.php">
 <?php
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-	if (!$_SESSION['musician_added']){
+
+	if(isset($_POST['return'])){
+		$_SESSION['ret'] = true;
+	}
+	else{
+		$_SESSION['ret'] = false;
+	}
+
+
+	if (isset($_POST['name'])){
+		$_SESSION['fl_name'] =  $_POST['name'];
+	}
+	if (isset($_POST['sname'])){
+		$_SESSION['fl_sname'] =  $_POST['sname'];
+	}
+	if (isset($_POST['rc'])){
+		$_SESSION['fl_rc'] =  $_POST['rc'];
+	}
+	if (isset($_POST['rc2'])){
+		$_SESSION['fl_rc2'] =  $_POST['rc2'];
+	}
+	if (isset($_POST['phone'])){
+		$_SESSION['fl_phone'] =  $_POST['phone'];
+	}
+	if (isset($_POST['email'])){
+		$_SESSION['fl_email'] =  $_POST['email'];
+	}
+	if (isset($_POST['town'])){
+		$_SESSION['fl_town'] =  $_POST['town'];
+	}
+	if (isset($_POST['str'])){
+		$_SESSION['fl_str'] =  $_POST['str'];
+	}
+	if (isset($_POST['sm'])){
+		$_SESSION['fl_sm'] =  $_POST['sm'];
+	}
+	if (isset($_POST['d'])){
+		$_SESSION['fl_d'] =  $_POST['d'];
+	}
+
+
+	if (!$_SESSION['musician_added'] and !$_SESSION['ret']){
 	if(!db_connect())
 		die('Nepodarilo se pripojit k databazi');
 
@@ -73,20 +114,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 	if((strlen($rc1) != 6 and strlen($rc1) != 5) or strlen($rc2) != 4){
 		echo "
-			<html>
-			<html>
-			<head>
-			<meta charset=\"utf-8\">
-			<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
-			<title>
-			Špatná délka rodného čísla
-			</title>
-
-			</head>
-
-			<body>
+			
 			
 			<div class=\"container-fluid\">
 			
@@ -124,12 +152,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 			</div>
 			
-			</body>
-			</html>
+			
 			
 			
 			";
-			die();
+			$_SESSION['filled'] = true;
 		
 	}
 	
@@ -188,7 +215,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</div>
 			<div class=\"col-lg-2 col-lg-offset-5\">
 				<span class=\"pull-right\">
-				<a class=\"btn btn-default btn-lg\" href=\"add_musician.php\" role=\"button\">Zpět na přidání hudebníka</a>
+				<button class=\"btn btn btn-lg\" name=\"return\" type=\"submit\" value=\"true\">Zpět na přidání hudebníka</button>
 				</span>
 			</div>
 			
@@ -213,7 +240,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 ?>
 
-<form method="post" action="add_musician.php">
+
 
 	<div class="container-fluid">
 	<form class="form-horizontal">
@@ -223,6 +250,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<?php
 		$_SESSION['musician_added'] = isset($_POST['name']) ? $_SESSION['musician_added'] : false;
 		$_SESSION['musician_added'] = isset($_SESSION['musician_added']) ? $_SESSION['musician_added'] : false;
+		$_SESSION['filled'] = isset($_SESSION['filled']) ? $_SESSION['filled'] : false;
+		$_SESSION['ret'] = isset($_SESSION['ret']) ? $_SESSION['ret'] : false;
+		
+		if ($_SESSION['ret']){
+			$_SESSION['filled'] = false;
+		}
+		
+		if(!$_SESSION['filled']){
 		if ($_SESSION['musician_added']){
 			
 			echo"<div class=\"form-group row\">
@@ -238,13 +273,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</div>
 				</div>";
 		}
+		}
 		?>
 		
 		
 		
 		<div class="form-group row">
 		
-			<?php 
+			<?php
+			if(!$_SESSION['filled']){
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -263,17 +300,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"first_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Jméno</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"first_name\" placeholder=\"Jméno\" name=\"name\" value=\"";if(isset($_SESSION['fl_name'])){ echo $_SESSION['fl_name'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"first_name\" class=\"control-label input-lg text-right\">*</label>";
+				unset($_SESSION['fl_name']);
 			}
-			
+			}
 			?>
 			
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -292,11 +331,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"second_name\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Příjmení</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"second_name\" placeholder=\"Příjmení\" name=\"sname\" value=\"";if(isset($_SESSION['fl_sname'])){ echo $_SESSION['fl_sname'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"second_name\" class=\"control-label input-lg text-right\">*</label>";
+				unset($_SESSION['fl_sname']);
 			}
-			
+			}
 			?>
 		
 			
@@ -304,6 +344,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -322,20 +363,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"rc\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Rodné číslo</label>
 				<div class=\"col-lg-3\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"Rodné číslo                                   /\" name=\"rc\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"Rodné číslo                                   /\" name=\"rc\" value=\"";if(isset($_SESSION['fl_rc'])){ echo $_SESSION['fl_rc'];} else{ echo "";}; echo "\" required>
 				</div>
 				<div class=\"col-lg-1\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"\" name=\"rc2\" required>
+				<input type=\"text\" class=\"form-control input-lg\" id=\"rc\" placeholder=\"\" name=\"rc2\" value=\"";if(isset($_SESSION['fl_rc2'])){ echo $_SESSION['fl_rc2'];} else{ echo "";}; echo "\" required>
 				</div>
 				<label for=\"rc2\" class=\"control-label input-lg text-right\">*</label>";
+				unset($_SESSION['fl_rc']);
+				unset($_SESSION['fl_rc2']);
 			}
-			
+			}
 			?>
 		
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -354,17 +398,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"tel\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">Telefon</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"phone\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"tel\" placeholder=\"Telefon\" name=\"phone\" value=\"";if(isset($_SESSION['fl_phone'])){ echo $_SESSION['fl_phone'];} else{ echo "";}; echo "\">
 				</div>
 				";
+				unset($_SESSION['fl_phone']);
 			}
-			
+			}
 			?>
 		
 		</div>
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -383,17 +429,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"email\" class=\"col-lg-1 col-lg-offset-2 control-label input-lg text-right\">E-mail</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"email\" placeholder=\"E-mail\" name=\"email\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"email\" placeholder=\"E-mail\" name=\"email\" value=\"";if(isset($_SESSION['fl_email'])){ echo $_SESSION['fl_email'];} else{ echo "";}; echo "\">
 				</div>
 				";
+				unset($_SESSION['fl_email']);
 			}
-			
+			}
 			?>
 		
 		</div>
 		<div class="form-group row">
 		
-			<?php 
+			<?php
+			if(!$_SESSION['filled']){			
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-1\">
@@ -412,11 +460,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo"
 				<label for=\"town\" class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Město (adresa)</label>
 				<div class=\"col-lg-4\">
-				<input type=\"text\" class=\"form-control input-lg\" id=\"town\" placeholder=\"Město\" name=\"town\">
+				<input type=\"text\" class=\"form-control input-lg\" id=\"town\" placeholder=\"Město\" name=\"town\" value=\"";if(isset($_SESSION['fl_town'])){ echo $_SESSION['fl_town'];} else{ echo "";}; echo "\">
 				</div>
 				";
+				unset($_SESSION['fl_town']);
 			}
-			
+			}
 			?>
 		
 			
@@ -424,6 +473,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
 		
 		<?php 
+			if(!$_SESSION['filled']){
 			if ($_SESSION['musician_added']){
 				echo"
 				<div class=\"form-group row\">
@@ -456,22 +506,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				<div class=\"form-group row\">
 				<label class=\"col-lg-2 col-lg-offset-1 control-label input-lg text-right\">Hraje na nástroje</label>
 				<div class=\"col-lg-4\">
-				<div class=\"checkbox\">
-					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"sm\" value=\"\">Smyčcové</label>
-					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"d\" value=\"\">Dechové</label>
-					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"str\" value=\"\">Strunné</label>
+				<div class=\"checkbox\">		
+					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"sm\" value=\"\""; if(isset($_SESSION['fl_sm'])){ echo " checked";} else{ echo "";}; echo ">Smyčcové</label>
+					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"d\" value=\"\""; if(isset($_SESSION['fl_d'])){ echo " checked";} else{ echo "";}; echo ">Dechové</label>
+					<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"str\" value=\"\""; if(isset($_SESSION['fl_str'])){ echo " checked";} else{ echo "";}; echo ">Strunné</label>
 				</div>
 				</div>
 				</div>
 				</h3>";
+				unset($_SESSION['fl_sm']);
+				unset($_SESSION['fl_d']);
+				unset($_SESSION['fl_str']);
 			}
-			
+			}
 			?>
 		
 		
 		<div class="form-group row">
 		
 			<?php 
+			if(!$_SESSION['filled']){
 			if (!$_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-2 col-lg-offset-3\">
@@ -495,17 +549,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					<a class=\"btn btn-default btn-lg\" href=\"add_musician.php\" role=\"button\">Přidat dalšího hudebníka</a>
 				</div>";
 			}
+			}
 			?>
 		
 		</div>
 		<div class="form-group row">
 			<?php 
+			if(!$_SESSION['filled']){
 			if (!$_SESSION['musician_added']){
 				echo"
 				<div class=\"col-lg-4 col-lg-offset-3\">
 					<strong>Všechny údaje označené * jsou povinné</strong>
 				</div>";
 					
+			}
 			}
 			?>
 		</div>
