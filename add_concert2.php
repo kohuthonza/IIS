@@ -54,7 +54,7 @@ if(isset($_POST['addC'])){
 					</body></html>
 				");
 			
-			$SQL = "insert into concerts (ID, Name, Date) values (NULL, '$_SESSION[name]', '$_SESSION[conct_date]')";
+			$SQL = "insert into concerts (ID, Name, Date) values (NULL, '$_SESSION[concert_name]', '$_SESSION[conct_date]')";
 			mysql_query($SQL, $_SESSION['db']);
 						
 			$idx = mysql_insert_id();

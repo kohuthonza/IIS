@@ -94,6 +94,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 
 
+	
+	
+	
 	if (!$_SESSION['musician_added'] and !$_SESSION['ret']){
 	if(!db_connect())
 		die('Nepodarilo se pripojit k databazi');
@@ -111,7 +114,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$str = 'F';
 	$d = 'F';
 	$sm = 'F';	
-	echo "ahoj";
+	
 	if(isset($_POST['str']))
 		$str = 'T';
 
@@ -180,6 +183,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 	if(mysql_query($cmmnd, $db)){
 		$_SESSION['musician_added'] = true;
+		
+		unset($_SESSION['fl_name']);
+		unset($_SESSION['fl_sname']);
+		unset($_SESSION['fl_rc']);
+		unset($_SESSION['fl_rc2']);
+		unset($_SESSION['fl_phone']);
+		unset($_SESSION['fl_email']);
+		unset($_SESSION['fl_town']);
+		unset($_SESSION['fl_str']);
+		unset($_SESSION['fl_sm']);
+		unset($_SESSION['fl_d']);
+	
+	
 	}
 	else{
 		if (mysql_errno($db) == 1062) {

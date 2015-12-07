@@ -93,6 +93,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			
 	if(mysql_query($cmmnd, $db)){
 		$_SESSION['user_added'] = true;
+		
+		unset($_SESSION['fl_name']); 
+		unset($_SESSION['fl_sname']);
+		unset($_SESSION['fl_year']);
+		unset($_SESSION['fl_month']);
+		unset($_SESSION['fl_day']);
+		unset($_SESSION['fl_login']);
+		unset($_SESSION['fl_role']);
+		unset($_SESSION['fl_phone']);
+	
+	
+		
+		
+		
 	}
 	else{
 		if (mysql_errno($db) == 1062) {
@@ -355,8 +369,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</span>
 				</div>
 				<div class=\"col-lg-4\"><h4><strong>";
-					$_SESSION['tel'] = isset($_POST['user_added']) ? $_SESSION['user_added'] : "";
-					echo $_SESSION['tel'];
+					echo $_POST['tel'];
 				echo	
 				"</strong></h4></div>";
 					

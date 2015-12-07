@@ -79,7 +79,7 @@ Přidat koncert
 				<strong>
 				<?php 
 				
-				$name_con = isset($_POST['Cname']) ? $_POST['Cname'] : $_SESSION['name'];
+				$name_con = isset($_POST['Cname']) ? $_POST['Cname'] : $_SESSION['concert_name'];
 				echo $name_con;
 				
 				
