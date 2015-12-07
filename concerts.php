@@ -156,22 +156,29 @@ $prev = $startrow - 10;
 
 if ($prev >= 0){
     echo "
-	   <div class=\"form-group row\">
+		<div class=\"form-group row\">
 	   <div class=\"col-lg-2\">
 	   <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".$prev.">".
       "<button class=\"btn btn-md btn-success\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></span></span></button>".
-	  "</form></div>";
+	  "</form></div>
+	  <div class=\"col-lg-2\">
+		 <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".($startrow+10).">".
+		  "<button class=\"btn btn-md btn-success\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-right\" aria-hidden=\"true\"></span></span></button>".
+		  "</form>
+		   </div>
+		   </div>";
 }
-else
+else{
     echo "<div class=\"form-group row\">";
-
-echo "<div class=\"col-lg-2\">
-      <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".($startrow+10).">".
-      "<button class=\"btn btn-md btn-success\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-right\" aria-hidden=\"true\"></span></span></button>".
-	  "</form>
-	   </div>
-	   </div>";
-
+    echo "<div class=\"col-lg-2 col-lg-offset-2\">
+		  <form method=\"post\" action=".$_SERVER['PHP_SELF']."?startrow=".($startrow+10).">".
+		  "<button class=\"btn btn-md btn-success\" type=\"submit\"><span class=\"glyphicon glyphicon-arrow-right\" aria-hidden=\"true\"></span></span></button>".
+		  "</form>
+		   </div>
+		   </div>";
+	}
+	
+	
 ?>
 
 </div>
