@@ -111,7 +111,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$str = 'F';
 	$d = 'F';
 	$sm = 'F';	
-	
+	echo "ahoj";
 	if(isset($_POST['str']))
 		$str = 'T';
 
@@ -155,17 +155,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</div>
 			<div class=\"col-lg-2 col-lg-offset-5\">
 				<span class=\"pull-right\">
-				<a class=\"btn btn-default btn-lg\" href=\"add_musician.php\" role=\"button\">Zpět na přidání hudebníka</a>
+				<button class=\"btn btn btn-lg\" name=\"return\" type=\"submit\" value=\"true\">Zpět na přidání hudebníka</button>
 				</span>
 			</div>
-			
 			</div>
+		
+			</form>
 			
-			
-			
+			</body>
+			</html>
 			
 			";
-			$_SESSION['filled'] = true;
+
+			
+		
+			die();
+			
 		
 	}
 	
@@ -179,20 +184,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	else{
 		if (mysql_errno($db) == 1062) {
 			echo "
-			<html>
-			<html>
-			<head>
-			<meta charset=\"utf-8\">
-			<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-			<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-			<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">
-			<title>
-			Hudebník již existuje
-			</title>
-
-			</head>
-
-			<body>
+			
 			
 			<div class=\"container-fluid\">
 			
@@ -229,19 +221,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</div>
 			
 			</div>
-			
+			</form>
 			</body>
 			</html>
 			
 			
 			";
-			die();
+			
 		}
 		else{
 			echo "error: ", mysql_error($db);
-			die();
+			
 		}
-		
+		die();
 	}
 
 	mysql_close($db);
